@@ -6,6 +6,8 @@ using UnityEngine;
 public class Movement2D : MonoBehaviour
 {
     [SerializeField] private float speed = 6f;
+    private const float maxSpeed = 20f;
+    
     [SerializeField] private bool normalizeSpeed;
     
     public float GetSpeed => speed;
@@ -16,6 +18,8 @@ public class Movement2D : MonoBehaviour
     
     void Awake()
     {
+        if (speed >= maxSpeed)
+            speed = maxSpeed;
         myBody = GetComponent<Rigidbody2D>();
     }
     
@@ -27,7 +31,9 @@ public class Movement2D : MonoBehaviour
     /// <returns></returns>
     public Vector2 Move(Vector2 dir, bool normalize)
     {
-        return normalize ? (dir * speed).normalized : dir * speed;
+        myBody.velocity = normalize ? (dir * speed).normalized : dir * speed;
+        
+        return myBody.velocity * Time.fixedDeltaTime;
     }
     
     public Vector2 Move(float x, float y, bool normalize)
