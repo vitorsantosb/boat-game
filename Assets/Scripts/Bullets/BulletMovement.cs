@@ -6,6 +6,9 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
     [SerializeField] private Movement2D movement2D;
+
+    [SerializeField] private Vector2 bulletTrajectory = Vector2.up;
+    
     private float speedAux;
     void Start()
     {
@@ -14,12 +17,12 @@ public class BulletMovement : MonoBehaviour
         speedAux = movement2D.GetSpeed;
     }
 
-    void MovingForward(float slowRatio)
+    void Moving(float slowRatio)
     {
-        movement2D.Move(Vector2.up * (speedAux * slowRatio), false);
+        movement2D.Move(bulletTrajectory * (speedAux * slowRatio), false);
     }
     void FixedUpdate()
     {
-        MovingForward(.3f);
+        Moving(.3f);
     }
 }
