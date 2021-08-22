@@ -14,6 +14,7 @@ public class GameManager : EnumManager
 
     [Header("GAME COMPONENTS")]
     public GameObject player;
+    public GameObject[] objectsDontDestroy = new GameObject[1];
     private bool isReady;
     private int waveCount;
 
@@ -25,24 +26,51 @@ public class GameManager : EnumManager
     void Awake()
     {
         SetStateGame(STATE_GAME.INICIALIZING);
-        timeToStart = 5;
-
+        timeToStart = 15;
+        isReady = false;
     }
     public void InicializeGame()
     {
+        if (GetStateGame() == STATE_GAME.INICIALIZING)
+        {
+            this.isReady = startGameButton.GetComponent<UserButton>().GetReady();
 
+        }
+        CountToInicialize();
     }
-    public void CountToInicialize(){
-        if(isReady){
-            timeToStart = Time.deltaTime;
-            CounteToInicialize.text = timeToStart.ToString("0");
-            if(timeToStart <= 0){
+    public void CountToInicialize()
+    {
+        if (isReady)
+        {
+            this.timeToStart -= Time.deltaTime;
+            this.CounteToInicialize.text = timeToStart.ToString("0");
+
+            if (timeToStart <= 0)
+            {
                 isReady = false;
+                SetStateGame(STATE_GAME.CHANGE_SCENE);
+                DontDestroyOnLoad(objectsDontDestroy[0]);
+                DontDestroyOnLoad(objectsDontDestroy[1]);
+                ChangeScene("Cenadojogo");
+                
+                FindPlayer();
             }
-            ChangeScene("Cena do jogo");
         }
     }
-    public void ChangeScene(string param){
-        SceneManager.LoadScene(param);
+    public void ChangeScene(string param)
+    {
+        if (GetStateGame() == STATE_GAME.CHANGE_SCENE)
+        {
+            SceneManager.LoadSceneAsync(param);
+        }
+    }
+    public void FindPlayer()
+    {
+        this.player = GameObject.FindGameObjectWithTag("Player");
+
+    }
+    void Update()
+    {
+        InicializeGame();
     }
 }
