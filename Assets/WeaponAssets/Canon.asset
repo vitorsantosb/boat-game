@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d4e5360e09cd274d8774f0fcb6e3d9e, type: 3}
+  m_Script: {fileID: 11500000, guid: cda7bd281e791914ca802c431b459fee, type: 3}
   m_Name: Canon
   m_EditorClassIdentifier: 
-  shootDamage: 15
+  shootDamage: 10
   shootDirection: {x: 0, y: 1}
-  fireRate: 0.45
+  fireRate: 0.3

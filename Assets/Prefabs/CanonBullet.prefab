@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5156779621633039142}
   - component: {fileID: 5156779621633039144}
   - component: {fileID: 5156779621633039146}
-  - component: {fileID: 5156779621633039147}
-  - component: {fileID: 5156779621633039149}
+  - component: {fileID: 7020079202445347998}
+  - component: {fileID: 4311967950010020704}
   m_Layer: 6
   m_Name: CanonBullet
   m_TagString: Untagged
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -4505829103154913275, guid: 521c5ae5b2dabe34585366b379b9e3cd, type: 3}
+  m_Sprite: {fileID: -4505829103154913275, guid: 1af2bc50fe328454a9acf246337c06ec, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 0.06, y: 0.06}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &5156779621633039147
+--- !u!114 &7020079202445347998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -132,12 +132,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5156779621633039143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f0e8435dfd23b4fb9165eb0d51c037, type: 3}
+  m_Script: {fileID: 11500000, guid: a0b2990191bb0b941ad7720204a2db75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.5
+  speed: 6
   normalizeSpeed: 1
---- !u!114 &5156779621633039149
+--- !u!114 &4311967950010020704
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5156779621633039143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a5c4e229b8968941b3ed768ce190728, type: 3}
+  m_Script: {fileID: 11500000, guid: 35b28d628ff9a3b43b088efee1733b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement2D: {fileID: 5156779621633039147}
+  movement2D: {fileID: 0}
