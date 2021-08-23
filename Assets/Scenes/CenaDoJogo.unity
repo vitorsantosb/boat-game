@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 382539827}
   - component: {fileID: 382539826}
   - component: {fileID: 382539828}
+  - component: {fileID: 382539829}
   m_Layer: 7
   m_Name: Inimigo
   m_TagString: Enemy
@@ -476,6 +477,19 @@ MonoBehaviour:
   enemyWeapon: {fileID: 11400000, guid: f654cdd6624c0cc46aeb0aab45586841, type: 2}
   enemyShootPoint: {fileID: 132765029}
   movement: {fileID: 382539826}
+--- !u!114 &382539829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 382539822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0e1de911dc8d247af57a1f426753aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: 50
 --- !u!1 &505658614
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,6 +785,7 @@ GameObject:
   - component: {fileID: 1289336494}
   - component: {fileID: 1289336493}
   - component: {fileID: 1289336492}
+  - component: {fileID: 1289336498}
   m_Layer: 7
   m_Name: Inimigo (1)
   m_TagString: Enemy
@@ -911,6 +926,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1289336498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289336491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0e1de911dc8d247af57a1f426753aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHP: 50
 --- !u!1 &1408350326
 GameObject:
   m_ObjectHideFlags: 0

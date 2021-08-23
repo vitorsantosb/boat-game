@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBoat : EnemyBase , IHit
+public class EnemyBoat : EnemyBase 
 {
     /*movement = para mover o Inimigo de uma certaManeira*/
     private int myHp;
@@ -38,15 +38,15 @@ public class EnemyBoat : EnemyBase , IHit
             ResetWeaponSettings();
         }
     }
-    public void DamageHit(float dmg)
-    {
-        myHp -= (int)dmg;
-        print($"Received {dmg} amounts of damage");
-        if (myHp <= 0)
-        {
-            gameObject.SetActive(false);
-        }
-    }
+    // public void DamageHit(float dmg)
+    // {
+    //     myHp -= (int)dmg;
+    //     print($"Received {dmg} amounts of damage");
+    //     if (myHp <= 0)
+    //     {
+    //         gameObject.SetActive(false);
+    //     }
+    // }
 
     private void Update()
     {
