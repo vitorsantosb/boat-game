@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class button : MonoBehaviour
+public class UserButton : MonoBehaviour
 {
     [SerializeField] private bool isReady;
     public Text buttonText;
@@ -27,7 +27,7 @@ public class button : MonoBehaviour
         else
         {
             Debug.Log("[-] DELETE USER - " + userName + " | " + DateTime.Now);
-            userName = "none";
+            userName = null;
         }
         Debug.Log("Actually user is " + userName);
     }

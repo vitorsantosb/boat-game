@@ -7,11 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
-    guid: 32c46dcdfa7222e4db7ad700b3c50907
+    guid: 6ed03795e70c9844e914e4366e97db55
   - enabled: 1
     path: Assets/Scenes/CenaDoJogo.unity
-    guid: 189f97ba8db506e4d943ce83cbb93523
+    guid: fd1f55a32cf10ae4d820d9496925c26a
   - enabled: 1
     path: Assets/Scenes/Creditos.unity
-    guid: cef3a98b6b416b84caf0014cc64c81d6
+    guid: 3add833ae8e2a2d4a8ae53b68a7e8d69
   m_configObjects: {}
