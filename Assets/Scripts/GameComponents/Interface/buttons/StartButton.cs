@@ -12,5 +12,10 @@ public class StartButton : MonoBehaviour
         startGame = !startGame;
         buttonText.text = startGame ? "STARTING" : "START";
     }
+    public bool GetGameStatus() => this.startGame;
     
+    void Update()
+    {
+        
+    }
 }
