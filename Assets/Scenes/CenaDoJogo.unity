@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0e1de911dc8d247af57a1f426753aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 50
+  HP: 50
 --- !u!1 &505658614
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,7 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0e1de911dc8d247af57a1f426753aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 50
+  HP: 50
 --- !u!1 &1408350326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1233,7 +1233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c0e1de911dc8d247af57a1f426753aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHP: 50
+  HP: 50
 --- !u!1 &1624282363
 GameObject:
   m_ObjectHideFlags: 0
