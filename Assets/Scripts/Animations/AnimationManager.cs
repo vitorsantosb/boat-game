@@ -32,5 +32,9 @@ public class AnimationManager : MonoBehaviour
         //reatribui o estado atual da animação
         currentState = newState;
     }
-   
+
+    public float GetAnimationLength()
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length;
+    }
 }

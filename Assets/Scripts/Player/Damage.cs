@@ -10,18 +10,45 @@ public class Damage : MonoBehaviour ,IHit
 
     private int myHp;
 
+    private AnimationManager anim;
     private void Start()
     {
         myHp = HP;
+        anim = GetComponent<AnimationManager>();
     }
 
+    private void OnDisable()
+    {
+        ResetLife();
+    }
+
+    void ResetLife()
+    {
+        myHp = HP;
+    }
+    
+    float t = 2f;
     public void DamageHit(float dmg)
     {
         myHp -= (int)dmg;
         Debug.Log($"Received {dmg} of damage ",this.gameObject);
         if (myHp <= 0)
         {
-            gameObject.SetActive(false);
+            switch (gameObject.tag)
+            {
+                case "Player":
+                    anim.ChangeAnimationStates("Player" + AnimatorProperties.s_Death);
+                    break;
+                case "Enemy":
+                    anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
+                    break;
+            }
+
+            t -= Time.deltaTime;
+            if (t <= 0)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 

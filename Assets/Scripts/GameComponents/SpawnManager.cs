@@ -11,9 +11,10 @@ public enum SpawnStates
 }
 public class SpawnManager : MonoBehaviour
 {
-    private int numeroDeSpawns;
+    [SerializeField] private int numeroDeSpawns;
 
     [SerializeField] private SpawnStates spawnStates;
+    
     [SerializeField] private List<Transform> spawmPos;
 
     //[SerializeField] private float timeUpdateInterval = 2.5f;
