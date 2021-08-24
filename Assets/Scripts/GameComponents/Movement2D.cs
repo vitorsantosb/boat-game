@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement2D : MonoBehaviour
@@ -12,6 +13,10 @@ public class Movement2D : MonoBehaviour
     
     public float GetSpeed => speed;
 
+    public float SetSpeed(float m_Speed)
+    {
+        return speed = m_Speed;
+    }
     public bool Normalize => normalizeSpeed;
 
     private Rigidbody2D myBody;

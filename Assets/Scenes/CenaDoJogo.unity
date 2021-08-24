@@ -491,7 +491,7 @@ Transform:
   m_GameObject: {fileID: 382539822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.64, y: 3.26, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 132765029}
   m_Father: {fileID: 0}
@@ -564,6 +564,8 @@ MonoBehaviour:
   enemyWeapon: {fileID: 11400000, guid: f654cdd6624c0cc46aeb0aab45586841, type: 2}
   enemyShootPoint: {fileID: 132765029}
   movement: {fileID: 382539826}
+  steerFreq: 0.1
+  steerAmp: 14
 --- !u!114 &382539829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1117,6 +1119,8 @@ MonoBehaviour:
   enemyWeapon: {fileID: 11400000, guid: 5ee2899577fb95c4b88dbf1100b466d1, type: 2}
   enemyShootPoint: {fileID: 1207067949}
   movement: {fileID: 1289336493}
+  steerFreq: 0.1
+  steerAmp: 1
 --- !u!114 &1289336493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,7 +1232,7 @@ Transform:
   m_GameObject: {fileID: 1289336491}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.64, y: 3.26, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 1207067949}
   m_Father: {fileID: 0}
@@ -1493,8 +1497,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1548992623}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.61, y: -2.62, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: -2.62, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 2115416878}
   m_Father: {fileID: 0}
