@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: island
+  m_Name: PlayerIdle
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,11 +20,13 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 1769400433183973103, guid: cc9d463521f4e444694becaca714164a, type: 3}
-    - time: 0.46666667
-      value: {fileID: 4132411290499988037, guid: cc9d463521f4e444694becaca714164a, type: 3}
-    - time: 0.9166667
-      value: {fileID: 1769400433183973103, guid: cc9d463521f4e444694becaca714164a, type: 3}
+      value: {fileID: 7558004887527869113, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
+    - time: 0.2
+      value: {fileID: -7676055692282309960, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
+    - time: 0.41666666
+      value: {fileID: -1392868806333149805, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
+    - time: 0.5833333
+      value: {fileID: 7558004887527869113, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -44,15 +46,16 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 1769400433183973103, guid: cc9d463521f4e444694becaca714164a, type: 3}
-    - {fileID: 4132411290499988037, guid: cc9d463521f4e444694becaca714164a, type: 3}
-    - {fileID: 1769400433183973103, guid: cc9d463521f4e444694becaca714164a, type: 3}
+    - {fileID: 7558004887527869113, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
+    - {fileID: -7676055692282309960, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
+    - {fileID: -1392868806333149805, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
+    - {fileID: 7558004887527869113, guid: dc711c28407899f4eb379b3848ee72f8, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.93333334
+    m_StopTime: 0.59999996
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

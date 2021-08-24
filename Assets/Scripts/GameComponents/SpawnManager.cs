@@ -41,7 +41,8 @@ public class SpawnManager : MonoBehaviour
                     spawmPos[Random.Range(i, numeroDeSpawns)].position,
                     spawmPos[Random.Range(i, numeroDeSpawns)].rotation);
                 //reseta a gravidade dos inimigos, para evitar o acumulo da velocidade dos barcos
-                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,1f);
+                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0f,Random.Range(-.5f,0.5f));
+                obj.GetComponent<Rigidbody2D>().gravityScale = .05f + Random.Range(0f,.2f);
                 
                 yield return new WaitForSeconds(delay);
             }
