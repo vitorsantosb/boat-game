@@ -45,4 +45,23 @@ public class Movement2D : MonoBehaviour
         
         return myBody.velocity * Time.fixedDeltaTime;
     }
+
+    public Vector2 SineWaveMove(Vector2 dir, float amp, bool normalize)
+    {
+        float xSin = Mathf.Sin(Time.time + dir.x) * amp;
+        float ySin = Mathf.Cos(Time.time + dir.y) * amp;
+
+        myBody.velocity = normalize ? (dir * (xSin * ySin)).normalized : dir * (xSin * ySin);
+
+        return myBody.velocity * Time.fixedDeltaTime;
+    }
+
+    public Vector2 SineWaveMove()
+    {
+        Vector2 sineDir = new Vector2(Mathf.Sin(Time.time), 0f);
+
+        myBody.velocity = sineDir;
+
+        return myBody.velocity;
+    }
 }

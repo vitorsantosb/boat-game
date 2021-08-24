@@ -526,7 +526,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 639663339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b35e2a64b61c6b44a2f004af5e625ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 17623783ad2adfd45980e33f0562b09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
@@ -536,10 +536,10 @@ MonoBehaviour:
   - {fileID: 407028607}
   - {fileID: 639663339}
   uiObjects:
-  - {fileID: 1527142998}
-  - {fileID: 1119041516}
   - {fileID: 1404115954}
   - {fileID: 831361097}
+  - {fileID: 1527142998}
+  - {fileID: 1119041516}
   CounteToInicialize: {fileID: 670628496}
 --- !u!4 &639663341
 Transform:
@@ -905,7 +905,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1119041516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97f01afa01b149e4786a8833f92615c4, type: 3}
+  m_Script: {fileID: 11500000, guid: a2d00b7b8d0f30c46ae7103ff631ab82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startGame: 0
@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404115954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3127a8aa2f4cc647b2b1228e565f7bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 96a722a8c749c75419538a7ea02781ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isReady: 0
