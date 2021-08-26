@@ -22,6 +22,7 @@ public class GameManager : EnumManager
     [Header("Spawn Config")]
     private int spawnCount;
 
+    private float unitySpawnTimer;
     public Transform spawnHierarchy;
     [SerializeField] private List<GameObject> spawnTransform = new List<GameObject>();
     
@@ -34,7 +35,7 @@ public class GameManager : EnumManager
         //spawn vars
         this.countDown = 2.5f;
         this.spawnCount = 5;
-
+        this.unitySpawnTimer = .86f;
         foreach (Transform child in spawnHierarchy.transform)
         {
             spawnTransform.Add(child.gameObject);
@@ -56,7 +57,7 @@ public class GameManager : EnumManager
             if (player != null)
             {
                 init_game = true;
-                ui_Text[1].text = SceneController.GetUserName();
+                ui_Text[0].text = SceneController.GetUserName();
                 SetStateGame(STATE_GAME.READY_TO_START);
             }
         }
@@ -89,11 +90,41 @@ public class GameManager : EnumManager
             {
                 SetStateGame(STATE_GAME.SPAWNING);
 
-                StartCoroutine(CreateUnitys(.86f));
+                StartCoroutine(CreateUnitys(unitySpawnTimer));
                 countDown = Random.Range(.8f, countAux);
             }
         }
     }
+
+    public float turn_timer = 60f;
+    private int turn_count;
+    private bool turnOn = false;
+   
+    
+    private void TurnController()
+    {
+        if (turnOn)
+        {
+            turn_timer -= Time.deltaTime;
+           // Debug.Log(turn_timer);
+            if (turn_timer <= 0)
+            {
+                turn_count++;
+                ui_Text[1].text = turn_count.ToString("0");
+                
+                unitySpawnTimer = unitySpawnTimer - 0.2f;
+                if(unitySpawnTimer <= .50f)
+                {
+                    unitySpawnTimer = .50f;
+                }
+                
+                Debug.Log("Tuno encerrado: Diminuido o tempo de respawn - " + unitySpawnTimer);
+                turn_timer = 10f;
+            }
+            
+        }
+    }
+
 
     #endregion
     #region Button
@@ -120,8 +151,9 @@ public class GameManager : EnumManager
         SetStateGame(STATE_GAME.INGAME);
 
         Debug.Log("iniciando jogo");
-
-        CreateUnitys(.86f);
+        SetStateGame(STATE_GAME.SPAWNING);
+        turnOn = true;
+        StartCoroutine(CreateUnitys(.86f));
     }
     #endregion
 
@@ -133,8 +165,8 @@ public class GameManager : EnumManager
             for (int i = 0; i < spawnCount; i++)
             {
                 GameObject obj = Pooling.Instance.SpawnFromPool("Inimigo",
-                   spawnTransform[Random.Range(i, spawnCount)].transform.position,
-                   spawnTransform[Random.Range(i, spawnCount)].transform.rotation);
+                   spawnTransform[Random.Range(i, spawnTransform.Count - 1)].transform.position,
+                   spawnTransform[Random.Range(i, spawnTransform.Count - 1)].transform.rotation);
 
                 //reseta a gravidade dos inimigos, para evitar o acumulo da velocidade dos barcos
                 obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, Random.Range(-.5f, 0.5f));
@@ -147,15 +179,15 @@ public class GameManager : EnumManager
             }
             SetStateGame(STATE_GAME.WAITING);
         }
-    }
+    } 
     
     #endregion
-
     #region Update
     void Update()
     {
         Countdown();
         CounteToInicialize();
+        TurnController();
     }
     #endregion
 
