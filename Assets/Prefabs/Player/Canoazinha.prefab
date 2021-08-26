@@ -12,15 +12,15 @@ GameObject:
   - component: {fileID: 5059280728922012671}
   - component: {fileID: 5059280728922012666}
   - component: {fileID: 5059280728922012667}
+  - component: {fileID: 4675120343483170759}
   - component: {fileID: 5059280728922012664}
   - component: {fileID: 5059280728922012665}
   - component: {fileID: 5059280728922012668}
   - component: {fileID: 5059280728922012669}
   - component: {fileID: 1648873304}
-  - component: {fileID: 4675120343483170759}
   m_Layer: 0
   m_Name: Canoazinha
-  m_TagString: Untagged
+  m_TagString: MiniPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115,7 +115,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5059280728922012640}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -128,6 +128,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &4675120343483170759
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5059280728922012640}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21e9460f160e20a459bc4d53b89e49ab, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &5059280728922012664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,25 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29545cdb67bbe3942b3776d26fc31e83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &4675120343483170759
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5059280728922012640}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 21e9460f160e20a459bc4d53b89e49ab, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5059280729421465762
 GameObject:
   m_ObjectHideFlags: 0

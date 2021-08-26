@@ -12,20 +12,34 @@ public class PlayerMovement : MonoBehaviour
 
     private bool steerRight;
     
-    private string stateAdd = "Player";
-    
+    private string playerStateAdd = "Player";
+    private string canoaStateAdd = "Canoa";
+
+    private string stateAux;
     void Start()
     {
         movement2D = GetComponent<Movement2D>();
         playerAnim = GetComponent<AnimationManager>();
         
+        switch (this.tag)
+        {
+            case "Player":
+                stateAux = playerStateAdd;
+                break;
+            case "MiniPlayer":
+                stateAux = canoaStateAdd;
+                break;
+            default:
+                stateAux = playerStateAdd;
+                break;
+        }
     }
 
     void SteerAnim(float x)
     {
         playerAnim.ChangeAnimationStates(x != 0 ? 
-            "Player" + AnimatorProperties.s_steerProp : 
-            "Player" + AnimatorProperties.s_Idle);
+            stateAux + AnimatorProperties.s_steerProp : 
+            stateAux + AnimatorProperties.s_Idle);
 
         if (x > 0 && !steerRight)
         {
@@ -33,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if(x < 0 && steerRight)
         {
-             Flip();
+            Flip();
         }
     }
 

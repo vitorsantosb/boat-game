@@ -10,6 +10,8 @@ public class Damage : MonoBehaviour ,IHit
 
     private int myHp;
 
+    private bool isDead;
+    
     private AnimationManager anim;
     private void Start()
     {
@@ -32,18 +34,29 @@ public class Damage : MonoBehaviour ,IHit
     {
         myHp -= (int)dmg;
         Debug.Log($"Received {dmg} of damage ",this.gameObject);
+        
         if (myHp <= 0)
         {
             switch (gameObject.tag)
             {
                 case "Player":
                     anim.ChangeAnimationStates("Player" + AnimatorProperties.s_Death);
+                    isDead = true;
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
+                    isDead = true;
                     break;
             }
 
+           
+        }
+    }
+
+    private void Update()
+    {
+        if (isDead)
+        {
             t -= Time.deltaTime;
             if (t <= 0)
             {
@@ -51,6 +64,4 @@ public class Damage : MonoBehaviour ,IHit
             }
         }
     }
-
-    
 }

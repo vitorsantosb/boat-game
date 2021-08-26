@@ -401,13 +401,17 @@ MonoBehaviour:
   listaDePools:
   - objTag: Canon
     prefab: {fileID: 5156779621633039143, guid: e15f770727e643e4a9ea8f60ebbcf343, type: 3}
-    size: 5
+    size: 15
+    willGrow: 1
   - objTag: EnemyCanon
     prefab: {fileID: 5156779621633039143, guid: 16bb19bab32f92843879715b00a2ee62, type: 3}
     size: 15
+    willGrow: 0
   - objTag: Inimigo
     prefab: {fileID: 2874100120703864184, guid: 5e361806c1b72574db00ddf7e098f3c9, type: 3}
     size: 10
+    willGrow: 0
+  willGrow: 0
 --- !u!4 &221069437
 Transform:
   m_ObjectHideFlags: 0
@@ -499,6 +503,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5059280728922012668, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012670, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -550,6 +558,10 @@ PrefabInstance:
     - target: {fileID: 5059280728922012670, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059280728922012671, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
+      propertyPath: m_FlipY
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
@@ -1318,6 +1330,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1185764261}
+  - component: {fileID: 1185764263}
+  - component: {fileID: 1185764262}
   m_Layer: 0
   m_Name: ENEMY SPAWNPOSITIONS
   m_TagString: Untagged
@@ -1344,6 +1358,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1185764262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185764260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f0e8435dfd23b4fb9165eb0d51c037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6
+  normalizeSpeed: 0
+--- !u!50 &1185764263
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1185764260}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1001 &1198870051
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1785,7 +1834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da65a89c3fdf374aa9f39fe960b201e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numeroDeSpawns: 0
+  numeroDeSpawns: 10
   spawnStates: 0
   spawmPos:
   - {fileID: 259007217}
@@ -1793,7 +1842,7 @@ MonoBehaviour:
   - {fileID: 837143423}
   - {fileID: 151797654}
   - {fileID: 1234621439}
-  countdown: 6
+  countdown: 3
 --- !u!4 &1635897533
 Transform:
   m_ObjectHideFlags: 0
@@ -2143,6 +2192,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'Inimigo '
       objectReference: {fileID: 0}
+    - target: {fileID: 2874100120703864188, guid: 5e361806c1b72574db00ddf7e098f3c9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e361806c1b72574db00ddf7e098f3c9, type: 3}
 --- !u!1001 &5059280730194181007
@@ -2155,6 +2208,10 @@ PrefabInstance:
     - target: {fileID: 5059280728922012640, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5059280728922012667, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+      propertyPath: m_BodyType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012670, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
       propertyPath: m_RootOrder
