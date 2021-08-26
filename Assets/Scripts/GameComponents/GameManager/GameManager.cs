@@ -7,118 +7,156 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : EnumManager
 {
-    [Header("UI COMPONENTS")]
-
-    public Button startGameButton;
-    
-
-
-    [Header("GAME COMPONENTS")]
+    [Header("Game components")]
+    public Text[] ui_Text = new Text[1];
+    public Text counter;
     public GameObject player;
-    private bool isReady;
-    private int waveCount;
-    [Header("ARRAYS FOR THE GAME")]
-    public GameObject[] objectsDontDestroy = new GameObject[1];
-    public GameObject[] uiObjects = new GameObject[2];
+    public GameObject initial_interface;
+    public GameObject[] buttons = new GameObject[1];
+
+    [Header("Timers vars")]
+    private bool startGame;
+    private float timerToInit;
 
 
-    [Header("Timers")]
-    private float timeToStart;
-    public Text CounteToInicialize;
+    [Header("Spawn Config")]
+    private int spawnCount;
+
+    public Transform spawnHierarchy;
+    [SerializeField] private List<GameObject> spawnTransform = new List<GameObject>();
+    
+    private float countDown;
+    private float countAux;
+    private int enemyCount;
 
     void Awake()
     {
-        SetStateGame(STATE_GAME.INICIALIZING);
-        timeToStart = 5;
-        isReady = false;
-    }
-    public void Inicialize()
-    {
-        if (GetStateGame() == STATE_GAME.INICIALIZING)
+        //spawn vars
+        this.countDown = 2.5f;
+        this.spawnCount = 5;
+
+        foreach (Transform child in spawnHierarchy.transform)
         {
-            this.isReady = startGameButton.GetComponent<UserButton>().GetReady();
-
+            spawnTransform.Add(child.gameObject);
         }
-        CountToInicialize();
+        //Timer vars
+        this.init_game = false;
+        this.timerToInit = 3;
+        
+        //Find Objects
+        player = GameObject.FindWithTag("Player");
+        
     }
-    public void CountToInicialize()
-    {
-        if (isReady)
-        {
-            this.timeToStart -= Time.deltaTime;
-            this.CounteToInicialize.text = timeToStart.ToString("0");
-
-            if (timeToStart <= 0)
-            {
-                isReady = false;
-                SetStateGame(STATE_GAME.CHANGE_SCENE);
-
-                DontDestroyOnLoad(objectsDontDestroy[0]);
-                DontDestroyOnLoad(objectsDontDestroy[1]);
-
-                ChangeScene("Cenadojogo");
-
-                FindPlayer();
-
-                SetStateGame(STATE_GAME.WAITING_TO_START);
-                InicializeGame();
-            }
-        }
-    }
-
     public void InicializeGame()
     {
-        if (GetStateGame() == STATE_GAME.WAITING_TO_START)
+        //ESTADO ATUAL DO JOGO
+        if (GetStateGame() == STATE_GAME.INICIALIZING)
         {
-            uiObjects[2].SetActive(false);
-            uiObjects[3].SetActive(false);
-
-            for (int i = 0; i <= 2; i++)
+            // VERIFICO SE O PLAYER != NULO
+            if (player != null)
             {
-                uiObjects[i].SetActive(true);
-                return;
+                init_game = true;
+                ui_Text[1].text = SceneController.GetUserName();
+                SetStateGame(STATE_GAME.READY_TO_START);
             }
-
         }
     }
-    public void FindPlayer()
+
+    #region Timers
+    public void CounteToInicialize()
     {
-        this.player = GameObject.FindGameObjectWithTag("Player");
+        if (GetStateGame() == STATE_GAME.READY_TO_START)
+        {
+            if (init_game)
+            {
+                timerToInit -= Time.deltaTime;
+                counter.text = timerToInit.ToString("0");
+                if (timerToInit <= 0)
+                {
+                    init_game = false;
+                    Inicialize();
+                }
+
+            }
+        }
+    }
+    void Countdown()
+    {
+        if (GetStateGame() == STATE_GAME.WAITING)
+        {
+            countDown -= Time.deltaTime;
+            if (countDown <= 0)
+            {
+                SetStateGame(STATE_GAME.SPAWNING);
+
+                StartCoroutine(CreateUnitys(.86f));
+                countDown = Random.Range(.8f, countAux);
+            }
+        }
+    }
+
+    #endregion
+    #region Button
+    [SerializeField] private bool init_game;
+    public Text buttonText;
+
+    public void StartGame()
+    {
+        init_game = !init_game;
+        buttonText.text = init_game ? "STARTING" : "START";
+
+        SetStateGame(STATE_GAME.INICIALIZING);
+
+        InicializeGame();
+    }
+    #endregion
+    #region IN GAME REGION
+    /*
+        Controlador do jogo
+    */
+    public void Inicialize()
+    {
+        initial_interface.SetActive(false);
+        SetStateGame(STATE_GAME.INGAME);
+
+        Debug.Log("iniciando jogo");
+
+        CreateUnitys(.86f);
+    }
+    #endregion
+
+    #region SPAWN UNITS
+    IEnumerator CreateUnitys(float delay)
+    {
+        if (GetStateGame() == STATE_GAME.SPAWNING)
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GameObject obj = Pooling.Instance.SpawnFromPool("Inimigo",
+                   spawnTransform[Random.Range(i, spawnCount)].transform.position,
+                   spawnTransform[Random.Range(i, spawnCount)].transform.rotation);
+
+                //reseta a gravidade dos inimigos, para evitar o acumulo da velocidade dos barcos
+                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, Random.Range(-.5f, 0.5f));
+                obj.GetComponent<Rigidbody2D>().gravityScale = .05f + Random.Range(0f, .2f);
+                obj.GetComponent<Movement2D>().SetSpeed(Random.Range(4f, 10f));
+                obj.GetComponent<EnemyBoat>().SetSteerAmplitude(Random.Range(1, 10));
+                
+                enemyCount++;
+                yield return new WaitForSeconds(delay);
+            }
+            SetStateGame(STATE_GAME.WAITING);
+        }
     }
     
-    public void startGame()
-    {
-
-    }
-
-    #region Game_paused
-
-    public void GameIsPaused(bool isPaused)
-    {
-        if (isPaused)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
-
     #endregion
 
-    #region SceneManager
-    public void ChangeScene(string param)
-    {
-        if (GetStateGame() == STATE_GAME.CHANGE_SCENE)
-        {
-            SceneManager.LoadSceneAsync(param);
-
-        }
-    }
-    #endregion
+    #region Update
     void Update()
     {
-        Inicialize();
+        Countdown();
+        CounteToInicialize();
     }
+    #endregion
+
 }

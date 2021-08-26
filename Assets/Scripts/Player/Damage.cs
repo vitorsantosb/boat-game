@@ -12,6 +12,8 @@ public class Damage : MonoBehaviour ,IHit
 
     private bool isDead;
     
+    public static double playerScore;
+    
     private AnimationManager anim;
     private void Start()
     {
@@ -45,6 +47,7 @@ public class Damage : MonoBehaviour ,IHit
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
+                    playerScore += 300;
                     isDead = true;
                     break;
             }
