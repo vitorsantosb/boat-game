@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - MiniPlayer
+  - Interface
   layers:
   - Default
   - TransparentFX

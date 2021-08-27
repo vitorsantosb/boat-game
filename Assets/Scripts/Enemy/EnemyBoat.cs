@@ -40,7 +40,7 @@ public class EnemyBoat : EnemyBase
     }
     void ResetWeaponSettings()
     {
-        gunFireRate = enemyWeapon.fireRate;
+        gunFireRate = Random.Range(1f,enemyWeapon.fireRate);
     }
     
     void EnemyShoot()

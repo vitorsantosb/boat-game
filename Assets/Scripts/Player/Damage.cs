@@ -15,11 +15,14 @@ public class Damage : MonoBehaviour ,IHit
     
     public static double playerScore;
     
+    
+    
     private AnimationManager anim;
     private void Start()
     {
         myHp = HP;
         anim = GetComponent<AnimationManager>();
+        
     }
 
     private void OnDisable()
@@ -31,7 +34,12 @@ public class Damage : MonoBehaviour ,IHit
     {
         myHp = HP;
     }
-    
+
+    void CacheDeath()
+    {
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerShootingScript>().enabled = false;
+    }
     float t = 2f;
     public void DamageHit(float dmg)
     {
@@ -44,8 +52,11 @@ public class Damage : MonoBehaviour ,IHit
             {
                 case "Player":
                     anim.ChangeAnimationStates("Player" + AnimatorProperties.s_Death);
-                    GetComponent<PlayerMovement>().enabled = false;
+                    CacheDeath();
                     print("Morri");
+                    //call interface
+                    
+                    //testa o player morrendo, já fiz a função
                     isDead = true;
                     break;
                 case "Enemy":
@@ -54,12 +65,27 @@ public class Damage : MonoBehaviour ,IHit
                     
                     Destroy(gameObject, 2f);
                     print("Inimigo animação toca");
-                    isDead = true;
+                    
                     break;
             }
         }
     }
+
+    private float time = 5f;
+    public void CallEndGame()
+    {
+        if (isDead)
+        {
+            print("OTO MORRENDO AAAAAAAAAA");
+            StartCoroutine(GameManager.FinishGame(time, GameManager.InterfaceGaymeOver));
+            isDead = false;
+        }
     
+    }
     
-   
+
+    private void Update()
+    {
+        CallEndGame();
+    }
 }

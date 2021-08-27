@@ -28,14 +28,14 @@ public class EnemyFIxPosition : MonoBehaviour
         dmg = GetComponent<Damage>();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        
-        if (other.CompareTag("Enemy"))
-        {
-            dmg.DamageHit(100);
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     
+    //     if (other.CompareTag("Enemy"))
+    //     {
+    //         dmg.DamageHit(100);
+    //     }
+    // }
 
     private void OnTriggerExit2D(Collider2D other)
     {

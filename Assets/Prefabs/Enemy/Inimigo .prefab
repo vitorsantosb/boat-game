@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: {fileID: 11400000, guid: c9ef75d45546e09489a669fda1aeba32, type: 2}
-  enemyWeapon: {fileID: 11400000, guid: 5ee2899577fb95c4b88dbf1100b466d1, type: 2}
+  enemyWeapon: {fileID: 11400000, guid: f654cdd6624c0cc46aeb0aab45586841, type: 2}
   enemyShootPoint: {fileID: 2874100120786165502}
   movement: {fileID: 2874100120703864190}
   steerFreq: 0.1

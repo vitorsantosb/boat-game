@@ -30,6 +30,8 @@ public class GameManager : EnumManager
     private float countAux;
     private int enemyCount;
 
+    private static GameObject interfaceGameOver;
+    public static GameObject InterfaceGaymeOver => interfaceGameOver;
     void Awake()
     {
         //spawn vars
@@ -46,7 +48,8 @@ public class GameManager : EnumManager
         
         //Find Objects
         player = GameObject.FindWithTag("Player");
-        
+        interfaceGameOver = GameObject.FindWithTag("Interface");
+        interfaceGameOver.SetActive(false);
     }
     public void InicializeGame()
     {
@@ -184,9 +187,17 @@ public class GameManager : EnumManager
     
     #endregion
 
-    #region MyRegion
-    
+    #region Interface calling
 
+    //Nice :DDDDDDDDDDD
+    public static IEnumerator FinishGame(float time, GameObject gameOverUI)
+    {
+
+        yield return new WaitForSeconds(time);
+        gameOverUI.SetActive(true);
+        Debug.Log("Finishing the game...");
+    }
+    public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
 
 
     #endregion
