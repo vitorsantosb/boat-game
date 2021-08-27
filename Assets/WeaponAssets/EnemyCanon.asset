@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootDamage: 10
   shootDirection: {x: 0, y: -1}
-  fireRate: 1.5
+  fireRate: 0.95

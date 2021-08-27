@@ -17,12 +17,25 @@ public class BulletMovement : MonoBehaviour
         speedAux = movement2D.GetSpeed;
     }
 
+    private float slowRatio = .3f;
+    private float countDown = 30f;
+    void Countdown()
+    {
+        countDown -= Time.deltaTime;
+        if (countDown <= 0)
+        {
+            countDown = 30f;
+
+            slowRatio += .45f;
+        }
+    }
     void Moving(float slowRatio)
     {
         movement2D.Move(bulletTrajectory * (speedAux * slowRatio), false);
     }
     void FixedUpdate()
     {
-        Moving(.3f);
+        Countdown();
+        Moving(slowRatio);
     }
 }

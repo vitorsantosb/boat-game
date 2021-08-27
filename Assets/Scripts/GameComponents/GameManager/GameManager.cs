@@ -35,7 +35,7 @@ public class GameManager : EnumManager
         //spawn vars
         this.countDown = 2.5f;
         this.spawnCount = 5;
-        this.unitySpawnTimer = .86f;
+        this.unitySpawnTimer = 1.2f;
         foreach (Transform child in spawnHierarchy.transform)
         {
             spawnTransform.Add(child.gameObject);

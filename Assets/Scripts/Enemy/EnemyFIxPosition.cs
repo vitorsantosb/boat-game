@@ -50,9 +50,9 @@ public class EnemyFIxPosition : MonoBehaviour
             // float x = gameObject.transform.position.x;
             // x += to_distance + Time.deltaTime;
             
-            other.transform.DOBlendableMoveBy(Vector3.right, 1f);
+            //other.transform.DOBlendableMoveBy(Vector3.right, 1f);
            
-            transform.DOBlendableMoveBy(Vector3.right, to_distance);
+            transform.DOBlendableMoveBy(Vector3.right * 2, to_distance);
 
         }
     }

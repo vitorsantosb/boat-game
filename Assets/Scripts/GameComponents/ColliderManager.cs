@@ -20,8 +20,12 @@ public class ColliderManager : MonoBehaviour
     
     
     
+    
+
     public void OnCollisionEnter2D(Collision2D other)
     {
+        bool otherObj = other.gameObject.CompareTag(otherObjTag);
+        
         if ((useCollisionEvents) && other.gameObject.CompareTag(otherObjTag))
         {
             collisionActionEvents?.Invoke();
@@ -30,6 +34,7 @@ public class ColliderManager : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
+        bool otherObj = other.gameObject.CompareTag(otherObjTag);
         if (useTriggerEvents && other.gameObject.CompareTag(otherObjTag))
         {
             other.GetComponent<IHit>()?.DamageHit(10f);

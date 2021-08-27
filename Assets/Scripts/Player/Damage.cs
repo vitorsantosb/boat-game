@@ -36,19 +36,24 @@ public class Damage : MonoBehaviour ,IHit
     public void DamageHit(float dmg)
     {
         myHp -= (int)dmg;
-        Debug.Log($"Received {dmg} of damage ",this.gameObject);
+        //Debug.Log($"Received {dmg} of damage ",this.gameObject);
         
-        if (myHp <= 0)
+        if (myHp <= 0 && this.gameObject != null)
         {
             switch (gameObject.tag)
             {
                 case "Player":
                     anim.ChangeAnimationStates("Player" + AnimatorProperties.s_Death);
+                    GetComponent<PlayerMovement>().enabled = false;
+                    print("Morri");
                     isDead = true;
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
                     playerScore += 300;
+                    
+                    Destroy(gameObject, 2f);
+                    print("Inimigo animação toca");
                     isDead = true;
                     break;
             }
@@ -56,18 +61,5 @@ public class Damage : MonoBehaviour ,IHit
     }
     
     
-    private void Update()
-    {
-        if (isDead)
-        {
-            t -= Time.deltaTime;
-            if (t <= 0)
-            {
-                t = 2;
-                
-                isDead = false;
-                Destroy(this);
-            }
-        }
-    }
+   
 }
