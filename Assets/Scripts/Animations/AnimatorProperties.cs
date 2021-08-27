@@ -17,5 +17,9 @@ public static class AnimatorProperties
     public static readonly string s_steerProp = "Steer";
 
     public static readonly string s_Death = "Death";
+    
+    //Krack
+
+    public static readonly string s_KrakenTrap = "KrakenAttack";
 
 }

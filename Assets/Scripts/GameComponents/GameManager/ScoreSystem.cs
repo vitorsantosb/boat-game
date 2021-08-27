@@ -23,9 +23,10 @@ public class ScoreSystem : MonoBehaviour
         }
 
     }
-
+    
     public void UpdateScore(int points)
     {
+        
         score = (points * scoreMultiply);
         playerScore.text = this.score.ToString();
     }
@@ -33,6 +34,7 @@ public class ScoreSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         this.score = Damage.playerScore;
     }
 }

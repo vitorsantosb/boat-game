@@ -14,6 +14,9 @@ public class GameManager : EnumManager
     public GameObject initial_interface;
     public GameObject[] buttons = new GameObject[1];
 
+    public static GameObject scoreUI;
+    private static float scoreMultiply;
+
     [Header("Timers vars")]
     private bool startGame;
     private float timerToInit;
@@ -50,6 +53,11 @@ public class GameManager : EnumManager
         player = GameObject.FindWithTag("Player");
         interfaceGameOver = GameObject.FindWithTag("Interface");
         interfaceGameOver.SetActive(false);
+        
+        
+        //Score vars
+        scoreMultiply = 1.1f;
+        scoreUI = GameObject.FindWithTag("Score");
     }
     public void InicializeGame()
     {
@@ -115,10 +123,18 @@ public class GameManager : EnumManager
                 turn_count++;
                 ui_Text[1].text = turn_count.ToString("0");
                 
+                
+                
                 unitySpawnTimer = unitySpawnTimer - 0.2f;
                 if(unitySpawnTimer <= .50f)
                 {
                     unitySpawnTimer = .50f;
+                }
+
+                if (turn_count >= 10)
+                {
+                    scoreMultiply += 0.2f;
+                    Debug.Log("Multiplicador aumentado em 0.2 atual de: " + scoreMultiply);
                 }
                 
                 Debug.Log("Tuno encerrado: Diminuido o tempo de respawn - " + unitySpawnTimer);
@@ -188,8 +204,7 @@ public class GameManager : EnumManager
     #endregion
 
     #region Interface calling
-
-    //Nice :DDDDDDDDDDD
+    
     public static IEnumerator FinishGame(float time, GameObject gameOverUI)
     {
 
@@ -199,6 +214,38 @@ public class GameManager : EnumManager
     }
     public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
 
+
+    #endregion
+
+    #region ScoreRegister
+    
+    public static void UpdateScoreMultiply()
+    {
+        
+    } 
+    
+    public static float result = 0;
+    public static IEnumerator Score(float points)
+    {
+
+        
+        if (scoreMultiply >= 2.5f)
+        {
+            scoreMultiply = 2.5f;
+        }
+        result += points * scoreMultiply;
+
+
+        yield return new WaitForSecondsRealtime(.1f);
+        
+        scoreUI.gameObject.GetComponent<Text>().text = result.ToString();
+        
+        print("Pontuação do jogador: " + result);
+        
+        
+        
+    }
+    
 
     #endregion
     #region Update

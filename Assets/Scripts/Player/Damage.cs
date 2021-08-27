@@ -13,7 +13,7 @@ public class Damage : MonoBehaviour ,IHit
 
     private bool isDead;
     
-    public static double playerScore;
+    public static float playerScore = 300;
     
     
     
@@ -61,8 +61,8 @@ public class Damage : MonoBehaviour ,IHit
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
-                    playerScore += 300;
                     
+                    StartCoroutine((GameManager.Score(playerScore)));
                     Destroy(gameObject, 2f);
                     print("Inimigo animação toca");
                     
@@ -76,7 +76,6 @@ public class Damage : MonoBehaviour ,IHit
     {
         if (isDead)
         {
-            print("OTO MORRENDO AAAAAAAAAA");
             StartCoroutine(GameManager.FinishGame(time, GameManager.InterfaceGaymeOver));
             isDead = false;
         }
