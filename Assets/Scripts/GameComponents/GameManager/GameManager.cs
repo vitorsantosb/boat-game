@@ -73,7 +73,7 @@ public class GameManager : EnumManager
             }
         }
     }
-
+    
     #region Timers
     public void CounteToInicialize()
     {
@@ -241,11 +241,8 @@ public class GameManager : EnumManager
         scoreUI.gameObject.GetComponent<Text>().text = result.ToString();
         
         print("Pontuação do jogador: " + result);
-        
-        
-        
+
     }
-    
 
     #endregion
     #region Update
@@ -257,4 +254,8 @@ public class GameManager : EnumManager
     }
     #endregion
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }

@@ -66,7 +66,12 @@ public class SceneController : MonoBehaviour
         Debug.Log("Actually user is " + userName);
     }
     public static string GetUserName() => userName;
-    
+
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     
     #endregion
     private void Update()

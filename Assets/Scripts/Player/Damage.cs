@@ -61,9 +61,9 @@ public class Damage : MonoBehaviour ,IHit
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
-                    
+                    gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
                     StartCoroutine((GameManager.Score(playerScore)));
-                    Destroy(gameObject, 2f);
+                    Destroy(gameObject, 1.8f);
                     print("Inimigo animação toca");
                     
                     break;
