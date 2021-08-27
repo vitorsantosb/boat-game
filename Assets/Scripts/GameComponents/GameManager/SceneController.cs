@@ -8,10 +8,11 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [Header("Interface")]
-    public Text counter;
+    public Text counter, user;
     private float counterTimer;
     public GameObject buttonToChangeScene;
-    
+    public GameObject FirstCanvas_;
+    public bool closeScene;
     [Header("Butão")]
     [SerializeField] private bool isReady_;
     public Text buttonText;
@@ -23,6 +24,7 @@ public class SceneController : MonoBehaviour
     {
         this.counterTimer = 5;
         this.isReady_ = false;
+        this.closeScene = false;
     }
 
     public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
@@ -45,31 +47,51 @@ public class SceneController : MonoBehaviour
     }
     #endregion
     #region Player Register
-    public void IsReady()
-    {
-        isReady_ = !isReady_;
-        buttonText.text = isReady_ ? "READY" : "UNREADY";
-        CreateUser();
-    }
     public void CreateUser()
     {
-        if (isReady_)
+        
+        if (closeScene)
         {
             userName = inputName.text;
+            this.user.text = inputName.text;
+            this.isReady_ = true;
             Debug.Log("[+] CREATE USER - " + userName + " | " + DateTime.Now);
         }
         else
         {
-            Debug.Log("[-] DELETE USER - " + userName + " | " + DateTime.Now);
-            userName = null;
+            user.text = "Guest";
+            this.isReady_ = true;
+            Debug.Log("[-] USER IS NOT DEFINED - GUEST USER - " + userName + " | " + DateTime.Now);
         }
         Debug.Log("Actually user is " + userName);
     }
     public static string GetUserName() => userName;
-
+    
+    
     #endregion
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            FirstCanvas_.SetActive(false);
+            if (inputName.placeholder == false)
+            {
+                this.closeScene = false;
+                CreateUser();
+                return;
+            }
+            this.closeScene = true;
+            CreateUser();
+            return;
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            FirstCanvas_.SetActive(true);
+            return;
+        }
         TimeToStart();
     }
+
+    
+    
 }
