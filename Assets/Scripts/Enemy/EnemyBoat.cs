@@ -15,7 +15,9 @@ public class EnemyBoat : EnemyBase
     [SerializeField] private float steerFreq = .1f; 
     
     [SerializeField] float steerAmp = 1f;
-
+    
+    
+    //private Vector2 startPos;
     public float SetSteerAmplitude(float m_SteerAmp) => steerAmp = m_SteerAmp;
     
     private void Start()
@@ -23,6 +25,8 @@ public class EnemyBoat : EnemyBase
         gunFireRate = enemyWeapon.fireRate;
         myHp = enemyType.HP;
         movement = GetComponent<Movement2D>();
+        
+        //startPos = transform.position;
     }
 
     public override void Move()
@@ -48,16 +52,9 @@ public class EnemyBoat : EnemyBase
             ResetWeaponSettings();
         }
     }
-    // public void DamageHit(float dmg)
-    // {
-    //     myHp -= (int)dmg;
-    //     print($"Received {dmg} amounts of damage");
-    //     if (myHp <= 0)
-    //     {
-    //         gameObject.SetActive(false);
-    //     }
-    // }
 
+    
+    
     private void FixedUpdate()
     {
         Move();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Damage : MonoBehaviour ,IHit
@@ -51,11 +52,10 @@ public class Damage : MonoBehaviour ,IHit
                     isDead = true;
                     break;
             }
-
-           
         }
     }
-
+    
+    
     private void Update()
     {
         if (isDead)
@@ -63,7 +63,10 @@ public class Damage : MonoBehaviour ,IHit
             t -= Time.deltaTime;
             if (t <= 0)
             {
-                gameObject.SetActive(false);
+                t = 2;
+                
+                isDead = false;
+                Destroy(this);
             }
         }
     }

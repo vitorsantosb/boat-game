@@ -10,7 +10,7 @@ public class GameManager : EnumManager
     [Header("Game components")]
     public Text[] ui_Text = new Text[1];
     public Text counter;
-    public GameObject player;
+    public GameObject player , enemyPrefab;
     public GameObject initial_interface;
     public GameObject[] buttons = new GameObject[1];
 
@@ -164,10 +164,11 @@ public class GameManager : EnumManager
         {
             for (int i = 0; i < spawnCount; i++)
             {
-                GameObject obj = Pooling.Instance.SpawnFromPool("Inimigo",
+                GameObject obj = Instantiate(enemyPrefab,
                    spawnTransform[Random.Range(i, spawnTransform.Count - 1)].transform.position,
                    spawnTransform[Random.Range(i, spawnTransform.Count - 1)].transform.rotation);
-
+                
+                
                 //reseta a gravidade dos inimigos, para evitar o acumulo da velocidade dos barcos
                 obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, Random.Range(-.5f, 0.5f));
                 obj.GetComponent<Rigidbody2D>().gravityScale = .05f + Random.Range(0f, .2f);
@@ -181,6 +182,13 @@ public class GameManager : EnumManager
         }
     } 
     
+    #endregion
+
+    #region MyRegion
+    
+
+
+
     #endregion
     #region Update
     void Update()
