@@ -9,6 +9,7 @@ TagManager:
   - Interface
   - Score
   - ScoreCanvas
+  - Kraken
   layers:
   - Default
   - TransparentFX

@@ -42,17 +42,33 @@ public class GameManager : EnumManager
     
     private static GameObject[] childres = new GameObject[2];
     public GameObject[] insertInChild = new GameObject[2];
+    
+    public GameObject ui_Ref;
+    public static GameObject ui_REF;
     public static GameObject InterfaceGaymeOver => interfaceGameOver;
+
+    [Header("Kraken Config")] 
+    public GameObject tentacleSpawnHierarchy;
+    
+    public List<Transform> tentacleSpawn = new List<Transform>();
+    public GameObject tentacleClone;
     void Awake()
     {
         //spawn vars
         this.countDown = 2.5f;
         this.spawnCount = 5;
-        this.unitySpawnTimer = 1.2f;
+        this.unitySpawnTimer = 2.5f; //1.2
+
         foreach (Transform child in spawnHierarchy.transform)
         {
             spawnTransform.Add(child.gameObject);
         }
+
+        foreach (Transform krackChild in tentacleSpawnHierarchy.transform)
+        {
+            tentacleSpawn.Add(krackChild);
+        }
+        
         //Timer vars
         this.init_game = false;
         this.timerToInit = 3;
@@ -70,6 +86,8 @@ public class GameManager : EnumManager
         //search interfaces
         childres[0] = insertInChild[0];
         childres[1] = insertInChild[1];
+
+        ui_REF = ui_Ref;
     }
     public void InicializeGame()
     {
@@ -115,6 +133,10 @@ public class GameManager : EnumManager
 
                 StartCoroutine(CreateUnitys(unitySpawnTimer));
                 countDown = Random.Range(.8f, countAux);
+                if (turn_count >= 2)
+                {
+                    StartCoroutine(SpawnTentacle(3));
+                }
             }
         }
     }
@@ -122,15 +144,17 @@ public class GameManager : EnumManager
     public float turn_timer = 60f;
     private int turn_count;
     private bool turnOn = false;
-   
+    
     
     private void TurnController()
     {
         if (turnOn)
         {
             turn_timer -= Time.deltaTime;
-           // Debug.Log(turn_timer);
-            if (turn_timer <= 0)
+           // Debug.Log(turn_timer); 
+           
+           
+           if (turn_timer <= 0)
             {
                 turn_count++;
                 ui_Text[1].text = turn_count.ToString("0");
@@ -161,8 +185,6 @@ public class GameManager : EnumManager
                         break;
                     }
                 }
-                
-                Debug.Log("Tuno encerrado: Diminuido o tempo de respawn - " + unitySpawnTimer);
                 turn_timer = 10f;
             }
             
@@ -193,8 +215,7 @@ public class GameManager : EnumManager
     {
         initial_interface.SetActive(false);
         SetStateGame(STATE_GAME.INGAME);
-
-        Debug.Log("iniciando jogo");
+        
         SetStateGame(STATE_GAME.SPAWNING);
         turnOn = true;
         StartCoroutine(CreateUnitys(.86f));
@@ -235,8 +256,6 @@ public class GameManager : EnumManager
 
         yield return new WaitForSeconds(time);
         gameOverUI.SetActive(true);
-        Debug.Log("Finishing the game...");
-        
         ChangeChildrenPosition(childres);
     }
     public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
@@ -263,9 +282,6 @@ public class GameManager : EnumManager
         yield return new WaitForSecondsRealtime(.1f);
         
         scoreUI.gameObject.GetComponent<Text>().text = result.ToString();
-        
-        print("Pontuação do jogador: " + result);
-
     }
 
     #endregion
@@ -288,6 +304,7 @@ public class GameManager : EnumManager
     public static void EnableOrDisableGameObject(bool param, GameObject obj) => obj.SetActive(param);
 
     //public Vector2 offset;
+    
     public static void ChangeChildrenPosition(GameObject[] child)
     {
         print(childres[0] + " " + childres[1] + " " + childres.Length);
@@ -296,19 +313,27 @@ public class GameManager : EnumManager
         Transform rectTransformchild = child[1].transform.GetChild(1);
 
         
-        rectTransformchild.position = new Vector2(rectTransformchild.position.x - 272.5f, rectTransformchild.position.y - 94);
+        rectTransformchild.position = new Vector2(ui_REF.transform.position.x, ui_REF.transform.position.y);
     }
 
-    public List<Transform> tentacleSpawn = new List<Transform>();
-    public GameObject tentacleClone;
-    public void SpawnTentacle()
+   
+    public IEnumerator SpawnTentacle(float delay)
     {
-        for (int index = 0; index <= tentacleSpawn.Count; index++)
+        if (GetStateGame() == STATE_GAME.SPAWNING)
         {
-            GameObject obj = Instantiate(tentacleClone, new Vector2(tentacleSpawn[index].transform.position.x,tentacleSpawn[index].transform.position.y), Quaternion.identity);
-            Destroy(obj,7f);
+            for (int index = 0; index < tentacleSpawn.Count; index++)
+            {
+                GameObject obj = Instantiate(tentacleClone,
+                    new Vector2(tentacleSpawn[Random.Range(index, tentacleSpawn.Count - 1)].transform.position.x,
+                        tentacleSpawn[Random.Range(index, tentacleSpawn.Count - 1)].transform.position.y),
+                    Quaternion.identity);
+
+                yield return new WaitForSecondsRealtime(delay);
+                Destroy(obj, 12);
+
+            }
         }
-        
+
     }
     
     

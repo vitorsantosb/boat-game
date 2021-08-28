@@ -20,7 +20,7 @@ public class DeactivateObject : MonoBehaviour
         if (countDown <= 0)
         {
             countDown = countAux;
-            Deactivate();
+            Destroy(gameObject,11f);
         }
     }
 

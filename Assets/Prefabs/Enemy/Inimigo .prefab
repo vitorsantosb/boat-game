@@ -217,8 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d285bcd6570f37f4a9bf265d6bbcb0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useCountdown: 0
-  countDown: 3
+  useCountdown: 1
+  countDown: 9
 --- !u!114 &4405179451694481299
 MonoBehaviour:
   m_ObjectHideFlags: 0
