@@ -10,6 +10,7 @@ TagManager:
   - Score
   - ScoreCanvas
   - Kraken
+  - MiniEnemy
   layers:
   - Default
   - TransparentFX

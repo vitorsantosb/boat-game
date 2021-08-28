@@ -55,10 +55,17 @@ public class Damage : MonoBehaviour ,IHit
                     print("Morri");
                     //call interface
                     
-                    
                     GameManager.EnableOrDisableGameObject(false, GameObject.FindWithTag("ScoreCanvas"));
                     //testa o player morrendo, já fiz a função
                     isDead = true;
+                    break;
+                
+                case "MiniPlayer":
+                    anim.ChangeAnimationStates("Canoa" + AnimatorProperties.s_Death);
+                    CacheDeath();
+                    print("Canoa Morreu");
+                    
+                    Destroy(gameObject, 1f);
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);

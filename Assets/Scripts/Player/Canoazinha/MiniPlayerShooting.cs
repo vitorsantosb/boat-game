@@ -1,28 +1,20 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShootingScript : WeaponBase
+public class MiniPlayerShooting : WeaponBase
 {
     private float gunFireRate;
-    
-    private void Start()
+    void Start()
     {
         gunFireRate = weaponProperties.fireRate;
     }
-
+    
     public override void Shoot()
     {
-        GameObject obj = Pooling.Instance.SpawnFromPool(bulletTagPrefab, shootPoint.position, Quaternion.identity);
+        GameObject obj = Pooling.Instance.SpawnFromPool("MiniCanon", shootPoint.position, Quaternion.identity);
     }
-
-    IEnumerator Shooting(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-        Shoot();
-    }
-
+    
     void Shooting()
     {
         gunFireRate -= Time.deltaTime;
@@ -37,7 +29,8 @@ public class PlayerShootingScript : WeaponBase
     {
         gunFireRate = weaponProperties.fireRate;
     }
-    private void Update()
+    
+    void Update()
     {
         if (Input.GetKey(KeyCode.Space))
         {

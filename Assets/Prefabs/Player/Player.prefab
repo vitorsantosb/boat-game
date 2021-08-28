@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponProperties: {fileID: 11400000, guid: 59892758d89cbbe4ba00d4bcf54f0a89, type: 2}
   shootPoint: {fileID: 5059280729421465761}
-  bulletPrefab: {fileID: 0}
+  bulletTagPrefab: Canon
 --- !u!114 &5907407983291156747
 MonoBehaviour:
   m_ObjectHideFlags: 0

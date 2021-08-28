@@ -15,7 +15,7 @@ public class ColliderManager : MonoBehaviour
     */
     
     [SerializeField] private bool useCollisionEvents, useTriggerEvents;
-    [SerializeField] private string otherObjTag;
+    [SerializeField] private string otherObjTag, otherObjTag2;
     [SerializeField] private UnityEvent collisionActionEvents, triggerActionEvents;
     
     
@@ -26,7 +26,7 @@ public class ColliderManager : MonoBehaviour
     {
         bool otherObj = other.gameObject.CompareTag(otherObjTag);
         
-        if ((useCollisionEvents) && other.gameObject.CompareTag(otherObjTag))
+        if ((useCollisionEvents) && other.gameObject.CompareTag(otherObjTag) ||	other.gameObject.CompareTag(otherObjTag2))
         {
             collisionActionEvents?.Invoke();
         }
@@ -35,7 +35,8 @@ public class ColliderManager : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         bool otherObj = other.gameObject.CompareTag(otherObjTag);
-        if (useTriggerEvents && other.gameObject.CompareTag(otherObjTag))
+        
+        if (useTriggerEvents && other.gameObject.CompareTag(otherObjTag) ||	other.gameObject.CompareTag(otherObjTag2))
         {
             other.GetComponent<IHit>()?.DamageHit(10f);
             triggerActionEvents?.Invoke();

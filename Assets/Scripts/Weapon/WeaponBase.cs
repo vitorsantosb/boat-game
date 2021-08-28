@@ -7,7 +7,7 @@ public abstract class WeaponBase : MonoBehaviour
     public WeaponProps weaponProperties;
     
     public Transform shootPoint; 
-    public GameObject bulletPrefab;
+    public string bulletTagPrefab;
     
     public abstract void Shoot();
 }

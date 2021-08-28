@@ -140,6 +140,7 @@ MonoBehaviour:
   useCollisionEvents: 0
   useTriggerEvents: 1
   otherObjTag: Enemy
+  otherObjTag2: MiniEnemy
   collisionActionEvents:
     m_PersistentCalls:
       m_Calls: []
@@ -170,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d285bcd6570f37f4a9bf265d6bbcb0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCountdown: 0
   countDown: 7
 --- !u!114 &1935276239605737373
 MonoBehaviour:

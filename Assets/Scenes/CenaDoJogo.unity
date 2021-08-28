@@ -615,6 +615,10 @@ MonoBehaviour:
     prefab: {fileID: 5156779621633039143, guid: 16bb19bab32f92843879715b00a2ee62, type: 3}
     size: 15
     willGrow: 0
+  - objTag: MiniCanon
+    prefab: {fileID: 5156779621633039143, guid: 4093beeb01f7216469672df29febe480, type: 3}
+    size: 15
+    willGrow: 0
   willGrow: 0
 --- !u!4 &221069437
 Transform:
@@ -743,7 +747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012640, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012666, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_IsTrigger
@@ -807,7 +811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012671, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_FlipY
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
@@ -2574,7 +2578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012640, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5059280728922012666, guid: 5fabded1754e8824680ea204a4e06ecb, type: 3}
       propertyPath: m_IsTrigger

@@ -33,6 +33,11 @@ public class PlayerCollisionManager : MonoBehaviour
             other.gameObject.GetComponent<Damage>().DamageHit(20f);
         }
 
+        if (other.gameObject.CompareTag("MiniPlayer"))
+        {
+            other.transform.SetParent(transform); 
+        }
+        
         if (other.gameObject.CompareTag("Kraken"))
         {
             startSnare = true;
