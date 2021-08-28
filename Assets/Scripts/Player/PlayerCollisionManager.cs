@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerCollisionManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PlayerCollisionManager : MonoBehaviour
 
     private PlayerMovement movement2D;
     private bool startSnare;
+    
+    [Header("Canoa Spawns")]
+    public Transform[] playerSpawns; 
+    public GameObject canoaPrefab;
     
     private void Start()
     {
@@ -24,7 +29,9 @@ public class PlayerCollisionManager : MonoBehaviour
             movement2D.enabled = false;
         }
     }
-    
+
+    private bool maxSpawnsReached;
+    int i = 0;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
@@ -33,9 +40,23 @@ public class PlayerCollisionManager : MonoBehaviour
             other.gameObject.GetComponent<Damage>().DamageHit(20f);
         }
 
-        if (other.gameObject.CompareTag("MiniPlayer"))
+        if (other.gameObject.CompareTag("CoinPlayer"))
         {
-            other.transform.SetParent(transform); 
+            Destroy(other.gameObject);
+            if (i < 4 && !maxSpawnsReached)
+            {
+                GameObject obj = Instantiate(canoaPrefab, playerSpawns[i].position, Quaternion.identity);
+                obj.transform.SetParent(transform);
+                i++;
+            }
+            else if (i > 4)
+            {
+                i = 0;
+                maxSpawnsReached = true;
+            }
+            
+
+
         }
         
         if (other.gameObject.CompareTag("Kraken"))

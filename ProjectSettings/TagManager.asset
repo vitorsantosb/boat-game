@@ -11,6 +11,7 @@ TagManager:
   - ScoreCanvas
   - Kraken
   - MiniEnemy
+  - CoinPlayer
   layers:
   - Default
   - TransparentFX
