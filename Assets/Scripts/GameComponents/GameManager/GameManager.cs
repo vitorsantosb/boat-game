@@ -206,6 +206,22 @@ public class GameManager : EnumManager
 
         InicializeGame();
     }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ReturnToMenu()
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void RestartGame()
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
+    
     #endregion
     #region IN GAME REGION
     /*
