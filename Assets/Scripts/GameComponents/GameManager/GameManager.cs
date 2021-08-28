@@ -294,8 +294,8 @@ public class GameManager : EnumManager
             scoreMultiply = 2.5f;
         }
         result += points * scoreMultiply;
-
-
+        
+    
         yield return new WaitForSecondsRealtime(.1f);
         
         scoreUI.gameObject.GetComponent<Text>().text = result.ToString();

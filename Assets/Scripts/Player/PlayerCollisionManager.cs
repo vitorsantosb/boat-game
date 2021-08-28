@@ -14,6 +14,7 @@ public class PlayerCollisionManager : MonoBehaviour
     [Header("Canoa Spawns")]
     public Transform[] playerSpawns; 
     public GameObject canoaPrefab;
+    public GameObject[] bandeiras = new GameObject[4];
     
     private void Start()
     {
@@ -52,6 +53,8 @@ public class PlayerCollisionManager : MonoBehaviour
             else if (i > 4)
             {
                 i = 0;
+                //i = 1
+                bandeiras[i - 1].GetComponent<SpriteChange>().ChangeSprite();
                 maxSpawnsReached = true;
             }
             
