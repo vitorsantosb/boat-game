@@ -16,10 +16,13 @@ public class PlayerMovement : MonoBehaviour
     private string canoaStateAdd = "Canoa";
 
     private string stateAux;
+
+    private SpriteRenderer spriteRenderer;
     void Start()
     {
         movement2D = GetComponent<Movement2D>();
         playerAnim = GetComponent<AnimationManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         
         switch (this.tag)
         {
@@ -43,11 +46,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (x > 0 && !steerRight)
         {
-            Flip();
+            Flip2();
         }
         else if(x < 0 && steerRight)
         {
-            Flip();
+            Flip2();
         }
     }
 
@@ -59,7 +62,13 @@ public class PlayerMovement : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
-    
+
+    void Flip2()
+    {
+        steerRight = !steerRight;
+
+        spriteRenderer.flipX = steerRight;
+    }
     void FixedUpdate()
     {
         float xAxis = Input.GetAxisRaw("Horizontal");
