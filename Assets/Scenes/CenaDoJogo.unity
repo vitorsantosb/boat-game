@@ -5383,6 +5383,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3743010554723728601, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+      propertyPath: lifeBars.Array.data[0]
+      value: 
+      objectReference: {fileID: 1404049325}
+    - target: {fileID: 3743010554723728601, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+      propertyPath: lifeBars.Array.data[1]
+      value: 
+      objectReference: {fileID: 1233589281}
+    - target: {fileID: 3743010554723728601, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+      propertyPath: lifeBars.Array.data[2]
+      value: 
+      objectReference: {fileID: 1344922413}
+    - target: {fileID: 3743010554723728601, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+      propertyPath: lifeBars.Array.data[3]
+      value: 
+      objectReference: {fileID: 1110706701}
+    - target: {fileID: 3743010554723728601, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+      propertyPath: lifeBars.Array.data[4]
+      value: 
+      objectReference: {fileID: 1439484368}
     - target: {fileID: 5059280728922012640, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
       propertyPath: m_Name
       value: Player

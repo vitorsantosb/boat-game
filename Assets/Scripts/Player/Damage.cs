@@ -11,6 +11,8 @@ public class Damage : MonoBehaviour ,IHit
 
     private int myHp;
 
+    public int GetMyHP() => myHp;
+    
     private bool isDead;
     
     public static float playerScore = 300;

@@ -8,14 +8,14 @@ public class SpriteChange : MonoBehaviour
 {
     [SerializeField] private Sprite spriteToChange;
 
-    private Sprite mySourceImage;
+    private Image mySourceImage;
     private void Start()
     {
-        mySourceImage = GetComponent<Image>().sprite;
+        mySourceImage = GetComponent<Image>();
     }
 
     public void ChangeSprite()
     {
-        mySourceImage = spriteToChange;
+        mySourceImage.sprite = spriteToChange;
     }
 }
