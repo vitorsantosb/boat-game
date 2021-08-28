@@ -8,18 +8,24 @@ public class AudioManager : MonoBehaviour
 {
     [SerializeField] private Sound[] sounds;
 
+    [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private AudioMixerGroup mainAudioMixerGroup;
 
-    public AudioMixerGroup MainAudioMixer
+    public AudioMixer MainAudioMixer
     {
-        get => mainAudioMixerGroup;
-        set => mainAudioMixerGroup = value;
+        get => audioMixer;
+        set => audioMixer = value;
     }
     
     #region AudioManager Singleton
 
     private static AudioManager instance;
     public static AudioManager Instance => instance;
+    
+    /*
+     * GETS E SETS
+     * 
+     */
     private void Awake()
     {
         if (instance != null)
@@ -42,7 +48,7 @@ public class AudioManager : MonoBehaviour
         foreach (Sound sound in sounds)
         {
             sound.AudioSource = gameObject.AddComponent<AudioSource>();
-            
+            sound.AudioSource.outputAudioMixerGroup = mainAudioMixerGroup;
             sound.AudioSource.clip = sound.AudioClip;
             sound.AudioSource.volume = sound.Volume;
             sound.AudioSource.loop = sound.Loop;

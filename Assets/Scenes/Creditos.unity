@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da65a89c3fdf374aa9f39fe960b201e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numeroDeSpawns: 0
   spawnStates: 0
   spawmPos:
   - {fileID: 941331291881627069}
@@ -423,6 +424,8 @@ MonoBehaviour:
   - objTag: Inimigo
     prefab: {fileID: 67438399}
     size: 15
+    willGrow: 0
+  willGrow: 0
 --- !u!4 &143014892
 Transform:
   m_ObjectHideFlags: 0
@@ -949,7 +952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1031240400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1047,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1047859259
 Transform:
   m_ObjectHideFlags: 0

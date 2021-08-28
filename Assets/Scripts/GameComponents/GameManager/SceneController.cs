@@ -25,6 +25,8 @@ public class SceneController : MonoBehaviour
         this.counterTimer = 5;
         this.isReady_ = false;
         this.closeScene = false;
+        
+       
     }
 
     public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
@@ -78,6 +80,7 @@ public class SceneController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            AudioManager.Instance.Play("OceanMenu");
             FirstCanvas_.SetActive(false);
             if (inputName.placeholder == false)
             {

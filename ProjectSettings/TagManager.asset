@@ -8,6 +8,7 @@ TagManager:
   - MiniPlayer
   - Interface
   - Score
+  - ScoreCanvas
   layers:
   - Default
   - TransparentFX

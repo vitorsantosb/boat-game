@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : EnumManager
 {
@@ -28,12 +30,18 @@ public class GameManager : EnumManager
     private float unitySpawnTimer;
     public Transform spawnHierarchy;
     [SerializeField] private List<GameObject> spawnTransform = new List<GameObject>();
+
+    [Header("canvas")] 
+    public GameObject canvasUI;
     
     private float countDown;
     private float countAux;
     private int enemyCount;
 
     private static GameObject interfaceGameOver;
+    
+    private static GameObject[] childres = new GameObject[2];
+    public GameObject[] insertInChild = new GameObject[2];
     public static GameObject InterfaceGaymeOver => interfaceGameOver;
     void Awake()
     {
@@ -58,6 +66,10 @@ public class GameManager : EnumManager
         //Score vars
         scoreMultiply = 1.1f;
         scoreUI = GameObject.FindWithTag("Score");
+        
+        //search interfaces
+        childres[0] = insertInChild[0];
+        childres[1] = insertInChild[1];
     }
     public void InicializeGame()
     {
@@ -131,10 +143,23 @@ public class GameManager : EnumManager
                     unitySpawnTimer = .50f;
                 }
 
-                if (turn_count >= 10)
+                switch (turn_count)
                 {
-                    scoreMultiply += 0.2f;
-                    Debug.Log("Multiplicador aumentado em 0.2 atual de: " + scoreMultiply);
+                    case 10:
+                    {
+                        UpdateScoreMultiply(0.2f);
+                        break;
+                    }
+                    case 15:
+                    {
+                        UpdateScoreMultiply(0.4f);
+                        break;
+                    }
+                    case 20:
+                    {
+                        UpdateScoreMultiply(0.8f);
+                        break;
+                    }
                 }
                 
                 Debug.Log("Tuno encerrado: Diminuido o tempo de respawn - " + unitySpawnTimer);
@@ -211,6 +236,8 @@ public class GameManager : EnumManager
         yield return new WaitForSeconds(time);
         gameOverUI.SetActive(true);
         Debug.Log("Finishing the game...");
+        
+        ChangeChildrenPosition(childres);
     }
     public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
 
@@ -218,12 +245,9 @@ public class GameManager : EnumManager
     #endregion
 
     #region ScoreRegister
-    
-    public static void UpdateScoreMultiply()
-    {
-        
-    } 
-    
+
+    public void UpdateScoreMultiply(float increment) => scoreMultiply += increment;
+
     public static float result = 0;
     public static IEnumerator Score(float points)
     {
@@ -254,8 +278,38 @@ public class GameManager : EnumManager
     }
     #endregion
 
+   
+    
     public void QuitGame()
     {
         Application.Quit();
     }
+
+    public static void EnableOrDisableGameObject(bool param, GameObject obj) => obj.SetActive(param);
+
+    //public Vector2 offset;
+    public static void ChangeChildrenPosition(GameObject[] child)
+    {
+        print(childres[0] + " " + childres[1] + " " + childres.Length);
+        child[0].transform.GetChild(3).SetParent(child[1].transform);
+        //child[1].transform.GetChild(1).position = new Vector2(child[1].transform.position.x - 400, child[1].transform.position.y - 212);
+        Transform rectTransformchild = child[1].transform.GetChild(1);
+
+        
+        rectTransformchild.position = new Vector2(rectTransformchild.position.x - 272.5f, rectTransformchild.position.y - 94);
+    }
+
+    public List<Transform> tentacleSpawn = new List<Transform>();
+    public GameObject tentacleClone;
+    public void SpawnTentacle()
+    {
+        for (int index = 0; index <= tentacleSpawn.Count; index++)
+        {
+            GameObject obj = Instantiate(tentacleClone, new Vector2(tentacleSpawn[index].transform.position.x,tentacleSpawn[index].transform.position.y), Quaternion.identity);
+            Destroy(obj,7f);
+        }
+        
+    }
+    
+    
 }

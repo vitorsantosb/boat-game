@@ -14,15 +14,13 @@ public class Damage : MonoBehaviour ,IHit
     private bool isDead;
     
     public static float playerScore = 300;
-    
-    
-    
+
     private AnimationManager anim;
     private void Start()
     {
         myHp = HP;
         anim = GetComponent<AnimationManager>();
-        
+
     }
 
     private void OnDisable()
@@ -39,6 +37,7 @@ public class Damage : MonoBehaviour ,IHit
     {
         GetComponent<PlayerMovement>().enabled = false;
         GetComponent<PlayerShootingScript>().enabled = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
     }
     float t = 2f;
     public void DamageHit(float dmg)
@@ -56,6 +55,8 @@ public class Damage : MonoBehaviour ,IHit
                     print("Morri");
                     //call interface
                     
+                    
+                    GameManager.EnableOrDisableGameObject(false, GameObject.FindWithTag("ScoreCanvas"));
                     //testa o player morrendo, já fiz a função
                     isDead = true;
                     break;
