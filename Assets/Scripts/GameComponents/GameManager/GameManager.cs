@@ -219,6 +219,7 @@ public class GameManager : EnumManager
 
     public void RestartGame()
     {
+        result = 0f;
         AsyncOperation op = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
     
