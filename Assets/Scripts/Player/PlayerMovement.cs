@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     
     [SerializeField] private Movement2D movement2D;
 
+    public Movement2D GetPlayerMove() => movement2D;
+    
     [SerializeField] private AnimationManager playerAnim;
 
     private bool steerRight;

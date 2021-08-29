@@ -20,6 +20,6 @@ public static class AnimatorProperties
     
     //Krack
 
-    public static readonly string s_KrakenTrap = "KrakenAttack";
+    public static readonly string s_KrakenTrap = "KrakenAtack";
 
 }

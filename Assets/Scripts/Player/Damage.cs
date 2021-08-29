@@ -66,8 +66,8 @@ public class Damage : MonoBehaviour ,IHit
                     anim.ChangeAnimationStates("Canoa" + AnimatorProperties.s_Death);
                     CacheDeath();
                     print("Canoa Morreu");
-                    
-                    Destroy(gameObject, 1f);
+
+                    StartCoroutine(Countdown(1.8f));
                     break;
                 case "Enemy":
                     anim.ChangeAnimationStates("Enemy" + AnimatorProperties.s_Death);
@@ -81,6 +81,12 @@ public class Damage : MonoBehaviour ,IHit
         }
     }
 
+    
+    IEnumerator Countdown(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        gameObject.SetActive(false);
+    }
     private float time = 5f;
     public void CallEndGame()
     {

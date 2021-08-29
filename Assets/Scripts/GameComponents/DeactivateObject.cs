@@ -23,7 +23,8 @@ public class DeactivateObject : MonoBehaviour
             Destroy(gameObject,11f);
         }
     }
-
+    
+    
     public void Deactivate()
     {
         gameObject.SetActive(false);

@@ -20,6 +20,8 @@ public class Movement2D : MonoBehaviour
     public bool Normalize => normalizeSpeed;
 
     private Rigidbody2D myBody;
+
+    public Rigidbody2D GetMyRigidBody2D() => myBody;
     
     void Awake()
     {
