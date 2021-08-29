@@ -70,8 +70,8 @@ public class GameManager : EnumManager
         }
         
         //Timer vars
-        this.init_game = false;
-        this.timerToInit = 3;
+        this.init_game = true;
+        this.timerToInit = 5;
         
         //Find Objects
         player = GameObject.FindWithTag("Player");
@@ -88,6 +88,9 @@ public class GameManager : EnumManager
         childres[1] = insertInChild[1];
 
         ui_REF = ui_Ref;
+        
+        //Inicializador do jogo
+        InicializeGame();
     }
     public void InicializeGame()
     {
@@ -155,13 +158,9 @@ public class GameManager : EnumManager
            
            
            if (turn_timer <= 0)
-            {
-                turn_count++;
-                ui_Text[1].text = turn_count.ToString("0");
-                
-                
-                
-                unitySpawnTimer = unitySpawnTimer - 0.2f;
+           {
+               turn_count++;
+               unitySpawnTimer = unitySpawnTimer - 0.2f;
                 if(unitySpawnTimer <= .50f)
                 {
                     unitySpawnTimer = .50f;
@@ -196,16 +195,6 @@ public class GameManager : EnumManager
     #region Button
     [SerializeField] private bool init_game;
     public Text buttonText;
-
-    public void StartGame()
-    {
-        init_game = !init_game;
-        buttonText.text = init_game ? "STARTING" : "START";
-
-        SetStateGame(STATE_GAME.INICIALIZING);
-
-        InicializeGame();
-    }
 
     public void ExitGame()
     {
@@ -302,17 +291,7 @@ public class GameManager : EnumManager
     }
 
     #endregion
-    #region Update
-    void Update()
-    {
-        Countdown();
-        CounteToInicialize();
-        TurnController();
-    }
-    #endregion
 
-   
-    
     public void QuitGame()
     {
         Application.Quit();
@@ -350,8 +329,47 @@ public class GameManager : EnumManager
 
             }
         }
-
     }
+
+    public bool runningGame = false;
+
+    public GameObject pauseBox;
+    public void PauseGame()
+    {
+        if (!runningGame)
+        {
+            pauseBox.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            pauseBox.SetActive(false);
+            Time.timeScale = 1;            
+        }
+        
+    }
+
+    public void UnpauseGame()
+    {
+        runningGame = true;
+        Time.timeScale = 1;
+    }
+    #region Update
+    void Update()
+    {
+        Countdown();
+        CounteToInicialize();
+        TurnController();
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            runningGame = !runningGame;
+            PauseGame();
+        }
+    }
+    #endregion
+
+
     
     
 }

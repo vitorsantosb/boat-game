@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [Header("Interface")]
-    public Text counter, user;
-    private float counterTimer;
+    public Text user;
+    //private float counterTimer;
     public GameObject buttonToChangeScene;
     public GameObject FirstCanvas_;
     public bool closeScene;
@@ -22,7 +22,7 @@ public class SceneController : MonoBehaviour
     
     void Awake()
     {
-        this.counterTimer = 5;
+        //this.counterTimer = 5;
         this.isReady_ = false;
         this.closeScene = false;
         
@@ -43,6 +43,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadSceneAsync(param);
     }
+    /*
     #region Timers
     public void TimeToStart()
     {
@@ -58,6 +59,7 @@ public class SceneController : MonoBehaviour
         }
     }
     #endregion
+    */
     #region Player Register
     public void CreateUser()
     {
@@ -95,10 +97,12 @@ public class SceneController : MonoBehaviour
             if (inputName.placeholder == false)
             {
                 this.closeScene = false;
+                this.isReady_ = true;
                 CreateUser();
                 return;
             }
             this.closeScene = true;
+            this.isReady_ = true;
             CreateUser();
             return;
         }
@@ -107,7 +111,7 @@ public class SceneController : MonoBehaviour
             FirstCanvas_.SetActive(true);
             return;
         }
-        TimeToStart();
+        //TimeToStart();
     }
 
     
