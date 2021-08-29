@@ -11,13 +11,15 @@ public class Pooling : MonoBehaviour
         public string objTag;
         public GameObject prefab;
         public int size;
-        
+        public bool willGrow;
     }
 
     private Dictionary<string, Queue<GameObject>> poolingDictionary = new Dictionary<string, Queue<GameObject>>();
 
     [SerializeField] private List<Pool> listaDePools = new List<Pool>();
 
+    public bool willGrow;
+    
     #region Singleton
 
     private static Pooling instance;
@@ -39,6 +41,12 @@ public class Pooling : MonoBehaviour
                 filaDeObjetos.Enqueue(obj);
                 obj.SetActive(false);
             }
+            // if (pool.willGrow)
+            // {
+            //     GameObject objAdd = Instantiate(pool.prefab);
+            //     filaDeObjetos.Enqueue(objAdd);
+            //     objAdd.SetActive(false);
+            // }
             poolingDictionary.Add(pool.objTag,filaDeObjetos);
         }
     }
@@ -60,6 +68,10 @@ public class Pooling : MonoBehaviour
         
         poolingDictionary[tag].Enqueue(pooledObj);
         
+        // if (willGrow)
+        // {
+        //     GameObject obj = Instantiate(pooledObj);
+        // }
         return pooledObj;
     }
 }

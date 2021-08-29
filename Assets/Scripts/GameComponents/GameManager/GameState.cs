@@ -10,5 +10,7 @@ public class GameState : MonoBehaviour
         WAITING_TO_START,
         READY_TO_START,
         INGAME,
+        SPAWNING,
+        WAITING
     }
 }

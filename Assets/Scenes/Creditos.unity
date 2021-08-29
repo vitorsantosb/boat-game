@@ -231,12 +231,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -4114276921789409336, guid: 63eac50b57995ed48880a03150f5386e, type: 3}
+  m_Sprite: {fileID: -5096202331533697379, guid: 1aeafcf2e0ff12446a5658d8cd666c93, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.2, y: 1.1866666}
+  m_Size: {x: 1.4933333, y: 1.7066667}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da65a89c3fdf374aa9f39fe960b201e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numeroDeSpawns: 0
   spawnStates: 0
   spawmPos:
   - {fileID: 941331291881627069}
@@ -423,6 +424,8 @@ MonoBehaviour:
   - objTag: Inimigo
     prefab: {fileID: 67438399}
     size: 15
+    willGrow: 0
+  willGrow: 0
 --- !u!4 &143014892
 Transform:
   m_ObjectHideFlags: 0
@@ -949,7 +952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1031240400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1047,7 +1050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1047859259
 Transform:
   m_ObjectHideFlags: 0
@@ -1890,7 +1893,7 @@ SpriteRenderer:
   m_Size: {x: 0.59, y: 0.97}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &2057977579

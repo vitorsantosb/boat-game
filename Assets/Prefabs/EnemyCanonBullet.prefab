@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -6896590955588960901, guid: 521c5ae5b2dabe34585366b379b9e3cd, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.7207494, a: 1}
+  m_Sprite: {fileID: 6841674672596373852, guid: 29623875eced8474b867a4ed7d3568b5, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f0e8435dfd23b4fb9165eb0d51c037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3.25
-  normalizeSpeed: 1
+  speed: 4
+  normalizeSpeed: 0
 --- !u!114 &5156779621633039149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,12 +165,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b18cc368afaafd44290f49b279d626e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useCollisionEvents: 0
+  useCollisionEvents: 1
   useTriggerEvents: 1
   otherObjTag: Player
+  otherObjTag2: MiniPlayer
   collisionActionEvents:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5156779621633039143}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5059280728922012664, guid: 7b04bad24845de04a9527d37061a6054, type: 3}
+        m_TargetAssemblyTypeName: Damage, Assembly-CSharp
+        m_MethodName: DamageHit
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   triggerActionEvents:
     m_PersistentCalls:
       m_Calls:
@@ -198,4 +223,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d285bcd6570f37f4a9bf265d6bbcb0db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useCountdown: 0
   countDown: 7

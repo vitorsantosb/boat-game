@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DeactivateObject : MonoBehaviour
 {
+    [SerializeField] private bool useCountdown;
     [SerializeField] private float countDown = 3f;
     
     private float countAux;
@@ -19,10 +20,15 @@ public class DeactivateObject : MonoBehaviour
         if (countDown <= 0)
         {
             countDown = countAux;
-            gameObject.SetActive(false);
+            Destroy(gameObject,11f);
         }
     }
-
+    
+    
+    public void Deactivate()
+    {
+        gameObject.SetActive(false);
+    }
     //Countdown com um delay antes da função ser chamada
     IEnumerator CountDown(float delay)
     {
@@ -36,6 +42,7 @@ public class DeactivateObject : MonoBehaviour
     }
     void Update()
     {
-        CountDown();
+        if(useCountdown)
+            CountDown();
     }
 }

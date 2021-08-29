@@ -15,14 +15,18 @@ public class ColliderManager : MonoBehaviour
     */
     
     [SerializeField] private bool useCollisionEvents, useTriggerEvents;
-    [SerializeField] private string otherObjTag;
+    [SerializeField] private string otherObjTag, otherObjTag2;
     [SerializeField] private UnityEvent collisionActionEvents, triggerActionEvents;
     
     
     
+    
+
     public void OnCollisionEnter2D(Collision2D other)
     {
-        if ((useCollisionEvents) && other.gameObject.CompareTag(otherObjTag))
+        bool otherObj = other.gameObject.CompareTag(otherObjTag);
+        
+        if ((useCollisionEvents) && other.gameObject.CompareTag(otherObjTag) ||	other.gameObject.CompareTag(otherObjTag2))
         {
             collisionActionEvents?.Invoke();
         }
@@ -30,8 +34,12 @@ public class ColliderManager : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (useTriggerEvents && other.gameObject.CompareTag(otherObjTag))
+        bool otherObj = other.gameObject.CompareTag(otherObjTag);
+        
+        if (useTriggerEvents && other.gameObject.CompareTag(otherObjTag) ||	other.gameObject.CompareTag(otherObjTag2))
         {
+            Pooling.Instance.SpawnFromPool("BalaVfx", other.transform.position, other.transform.rotation);
+            AudioManager.Instance.Play("Tiro");
             other.GetComponent<IHit>()?.DamageHit(10f);
             triggerActionEvents?.Invoke();
         }

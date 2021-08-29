@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerShootingScript : WeaponBase
 {
     private float gunFireRate;
+    
     private void Start()
     {
         gunFireRate = weaponProperties.fireRate;
@@ -13,7 +14,7 @@ public class PlayerShootingScript : WeaponBase
 
     public override void Shoot()
     {
-        GameObject obj = Pooling.Instance.SpawnFromPool("Canon", shootPoint.position, Quaternion.identity);
+        GameObject obj = Pooling.Instance.SpawnFromPool(bulletTagPrefab, shootPoint.position, Quaternion.identity);
     }
 
     IEnumerator Shooting(float delayTime)

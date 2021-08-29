@@ -1,124 +1,375 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : EnumManager
 {
-    [Header("UI COMPONENTS")]
+    [Header("Game components")]
+    public Text[] ui_Text = new Text[1];
+    public Text counter;
+    public GameObject player , enemyPrefab;
+    public GameObject initial_interface;
+    public GameObject[] buttons = new GameObject[1];
 
-    public Button startGameButton;
+    public static GameObject scoreUI;
+    private static float scoreMultiply;
+
+    [Header("Timers vars")]
+    private bool startGame;
+    private float timerToInit;
+
+
+    [Header("Spawn Config")]
+    private int spawnCount;
+
+    private float unitySpawnTimer;
+    public Transform spawnHierarchy;
+    [SerializeField] private List<GameObject> spawnTransform = new List<GameObject>();
+
+    [Header("canvas")] 
+    public GameObject canvasUI;
     
+    private float countDown;
+    private float countAux;
+    private int enemyCount;
 
+    private static GameObject interfaceGameOver;
+    
+    private static GameObject[] childres = new GameObject[2];
+    public GameObject[] insertInChild = new GameObject[2];
+    
+    public GameObject ui_Ref;
+    public static GameObject ui_REF;
+    public static GameObject InterfaceGaymeOver => interfaceGameOver;
 
-    [Header("GAME COMPONENTS")]
-    public GameObject player;
-    private bool isReady;
-    private int waveCount;
-    [Header("ARRAYS FOR THE GAME")]
-    public GameObject[] objectsDontDestroy = new GameObject[1];
-    public GameObject[] uiObjects = new GameObject[2];
-
-
-    [Header("Timers")]
-    private float timeToStart;
-    public Text CounteToInicialize;
-
+    [Header("Kraken Config")] 
+    public GameObject tentacleSpawnHierarchy;
+    
+    public List<Transform> tentacleSpawn = new List<Transform>();
+    public GameObject tentacleClone;
     void Awake()
     {
-        SetStateGame(STATE_GAME.INICIALIZING);
-        timeToStart = 5;
-        isReady = false;
-    }
-    public void Inicialize()
-    {
-        if (GetStateGame() == STATE_GAME.INICIALIZING)
+        //spawn vars
+        this.countDown = 2.5f;
+        this.spawnCount = 5;
+        this.unitySpawnTimer = 2.5f; //1.2
+
+        foreach (Transform child in spawnHierarchy.transform)
         {
-            this.isReady = startGameButton.GetComponent<UserButton>().GetReady();
-
+            spawnTransform.Add(child.gameObject);
         }
-        CountToInicialize();
-    }
-    public void CountToInicialize()
-    {
-        if (isReady)
+
+        foreach (Transform krackChild in tentacleSpawnHierarchy.transform)
         {
-            this.timeToStart -= Time.deltaTime;
-            this.CounteToInicialize.text = timeToStart.ToString("0");
-
-            if (timeToStart <= 0)
-            {
-                isReady = false;
-                SetStateGame(STATE_GAME.CHANGE_SCENE);
-
-                DontDestroyOnLoad(objectsDontDestroy[0]);
-                DontDestroyOnLoad(objectsDontDestroy[1]);
-
-                ChangeScene("Cenadojogo");
-
-                FindPlayer();
-
-                SetStateGame(STATE_GAME.WAITING_TO_START);
-                InicializeGame();
-            }
+            tentacleSpawn.Add(krackChild);
         }
-    }
+        
+        //Timer vars
+        this.init_game = true;
+        this.timerToInit = 5;
+        
+        //Find Objects
+        player = GameObject.FindWithTag("Player");
+        interfaceGameOver = GameObject.FindWithTag("Interface");
+        interfaceGameOver.SetActive(false);
+        
+        
+        //Score vars
+        scoreMultiply = 1.1f;
+        scoreUI = GameObject.FindWithTag("Score");
+        
+        //search interfaces
+        childres[0] = insertInChild[0];
+        childres[1] = insertInChild[1];
 
+        ui_REF = ui_Ref;
+        
+        //Inicializador do jogo
+        InicializeGame();
+    }
     public void InicializeGame()
     {
-        if (GetStateGame() == STATE_GAME.WAITING_TO_START)
+        //ESTADO ATUAL DO JOGO
+        if (GetStateGame() == STATE_GAME.INICIALIZING)
         {
-            uiObjects[2].SetActive(false);
-            uiObjects[3].SetActive(false);
-
-            for (int i = 0; i <= 2; i++)
+            // VERIFICO SE O PLAYER != NULO
+            if (player != null)
             {
-                uiObjects[i].SetActive(true);
-                return;
+                init_game = true;
+                ui_Text[0].text = SceneController.GetUserName();
+                SetStateGame(STATE_GAME.READY_TO_START);
             }
-
         }
     }
-    public void FindPlayer()
+    
+    #region Timers
+    public void CounteToInicialize()
     {
-        this.player = GameObject.FindGameObjectWithTag("Player");
+        if (GetStateGame() == STATE_GAME.READY_TO_START)
+        {
+            if (init_game)
+            {
+                timerToInit -= Time.deltaTime;
+                counter.text = timerToInit.ToString("0");
+                if (timerToInit <= 0)
+                {
+                    init_game = false;
+                    Inicialize();
+                }
+
+            }
+        }
+    }
+    void Countdown()
+    {
+        if (GetStateGame() == STATE_GAME.WAITING)
+        {
+            countDown -= Time.deltaTime;
+            if (countDown <= 0)
+            {
+                SetStateGame(STATE_GAME.SPAWNING);
+
+                StartCoroutine(CreateUnitys(unitySpawnTimer));
+                countDown = Random.Range(.8f, countAux);
+                if (turn_count >= 2)
+                {
+                    StartCoroutine(SpawnTentacle(3));
+                }
+            }
+        }
+    }
+
+    public float turn_timer = 60f;
+    private int turn_count;
+    private bool turnOn = false;
+    
+    
+    private void TurnController()
+    {
+        if (turnOn)
+        {
+            turn_timer -= Time.deltaTime;
+           // Debug.Log(turn_timer); 
+           
+           
+           if (turn_timer <= 0)
+           {
+               turn_count++;
+               unitySpawnTimer = unitySpawnTimer - 0.2f;
+                if(unitySpawnTimer <= .50f)
+                {
+                    unitySpawnTimer = .50f;
+                }
+
+                switch (turn_count)
+                {
+                    case 10:
+                    {
+                        UpdateScoreMultiply(0.2f);
+                        break;
+                    }
+                    case 15:
+                    {
+                        UpdateScoreMultiply(0.4f);
+                        break;
+                    }
+                    case 20:
+                    {
+                        UpdateScoreMultiply(0.8f);
+                        break;
+                    }
+                }
+                turn_timer = 10f;
+            }
+            
+        }
+    }
+
+
+    #endregion
+    #region Button
+    [SerializeField] private bool init_game;
+    public Text buttonText;
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ReturnToMenu()
+    {
+        AsyncOperation op = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
+    public void RestartGame()
+    {
+        result = 0f;
+        AsyncOperation op = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
     }
     
-    public void startGame()
+    #endregion
+    #region IN GAME REGION
+    /*
+        Controlador do jogo
+    */
+    public void Inicialize()
+    {
+        initial_interface.SetActive(false);
+        SetStateGame(STATE_GAME.INGAME);
+        
+        SetStateGame(STATE_GAME.SPAWNING);
+        turnOn = true;
+        StartCoroutine(CreateUnitys(.86f));
+    }
+    #endregion
+
+    #region SPAWN UNITS
+    IEnumerator CreateUnitys(float delay)
+    {
+        if (GetStateGame() == STATE_GAME.SPAWNING)
+        {
+            for (int i = 0; i < spawnCount; i++)
+            {
+                GameObject obj = Instantiate(enemyPrefab,
+                   spawnTransform[Random.Range(i, spawnTransform.Count - 1)].transform.position,
+                   spawnTransform[Random.Range(i, spawnTransform.Count - 1)].transform.rotation);
+                
+                
+                //reseta a gravidade dos inimigos, para evitar o acumulo da velocidade dos barcos
+                obj.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, Random.Range(-.5f, 0.5f));
+                obj.GetComponent<Rigidbody2D>().gravityScale = .05f + Random.Range(0f, .2f);
+                obj.GetComponent<Movement2D>().SetSpeed(Random.Range(4f, 10f));
+                obj.GetComponent<EnemyBoat>().SetSteerAmplitude(Random.Range(1, 10));
+                
+                enemyCount++;
+                yield return new WaitForSeconds(delay);
+            }
+            SetStateGame(STATE_GAME.WAITING);
+        }
+    } 
+    
+    #endregion
+
+    #region Interface calling
+    
+    public static IEnumerator FinishGame(float time, GameObject gameOverUI)
     {
 
+        yield return new WaitForSeconds(time);
+        gameOverUI.SetActive(true);
+        ChangeChildrenPosition(childres);
+    }
+    public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
+
+
+    #endregion
+
+    #region ScoreRegister
+
+    public void UpdateScoreMultiply(float increment) => scoreMultiply += increment;
+
+    public static float result = 0;
+    public static IEnumerator Score(float points)
+    {
+
+        
+        if (scoreMultiply >= 2.5f)
+        {
+            scoreMultiply = 2.5f;
+        }
+        result += points * scoreMultiply;
+        
+    
+        yield return new WaitForSecondsRealtime(.1f);
+        
+        scoreUI.gameObject.GetComponent<Text>().text = result.ToString();
     }
 
-    #region Game_paused
+    #endregion
 
-    public void GameIsPaused(bool isPaused)
+    public void QuitGame()
     {
-        if (isPaused)
+        Application.Quit();
+    }
+
+    public static void EnableOrDisableGameObject(bool param, GameObject obj) => obj.SetActive(param);
+
+    //public Vector2 offset;
+    
+    public static void ChangeChildrenPosition(GameObject[] child)
+    {
+        print(childres[0] + " " + childres[1] + " " + childres.Length);
+        child[0].transform.GetChild(3).SetParent(child[1].transform);
+        //child[1].transform.GetChild(1).position = new Vector2(child[1].transform.position.x - 400, child[1].transform.position.y - 212);
+        Transform rectTransformchild = child[1].transform.GetChild(1);
+
+        
+        rectTransformchild.position = new Vector2(ui_REF.transform.position.x, ui_REF.transform.position.y);
+    }
+
+   
+    public IEnumerator SpawnTentacle(float delay)
+    {
+        if (GetStateGame() == STATE_GAME.SPAWNING)
         {
+            for (int index = 0; index < tentacleSpawn.Count; index++)
+            {
+                GameObject obj = Instantiate(tentacleClone,
+                    new Vector2(tentacleSpawn[Random.Range(index, tentacleSpawn.Count - 1)].transform.position.x,
+                        tentacleSpawn[Random.Range(index, tentacleSpawn.Count - 1)].transform.position.y),
+                    Quaternion.identity);
+
+                yield return new WaitForSecondsRealtime(delay);
+                Destroy(obj, 12);
+
+            }
+        }
+    }
+
+    public bool runningGame = false;
+
+    public GameObject pauseBox;
+    public void PauseGame()
+    {
+        if (!runningGame)
+        {
+            pauseBox.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
-            Time.timeScale = 1;
+            pauseBox.SetActive(false);
+            Time.timeScale = 1;            
         }
+        
     }
 
-    #endregion
-
-    #region SceneManager
-    public void ChangeScene(string param)
+    public void UnpauseGame()
     {
-        if (GetStateGame() == STATE_GAME.CHANGE_SCENE)
-        {
-            SceneManager.LoadSceneAsync(param);
-
-        }
+        runningGame = true;
+        Time.timeScale = 1;
     }
-    #endregion
+    #region Update
     void Update()
     {
-        Inicialize();
+        Countdown();
+        CounteToInicialize();
+        TurnController();
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        {
+            runningGame = !runningGame;
+            PauseGame();
+        }
     }
+    #endregion
+
+
+    
+    
 }

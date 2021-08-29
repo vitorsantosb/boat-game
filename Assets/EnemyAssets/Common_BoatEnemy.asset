@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502a94bf0aad1234f891b3d532457fa3, type: 3}
   m_Name: Common_BoatEnemy
   m_EditorClassIdentifier: 
-  HP: 100
+  HP: 30
   damage: 5
