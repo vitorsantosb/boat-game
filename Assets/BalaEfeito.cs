@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BalaEfeito : MonoBehaviour
 {
-    private float countDown = 0.1f;
+    private float countDown = 1f;
 
     private float countAux;
     void Start()
@@ -17,7 +17,7 @@ public class BalaEfeito : MonoBehaviour
         if (countDown <= 0)
         {
             countDown = countAux;
-            Destroy(gameObject,11f);
+            gameObject.SetActive(false);
         }
     }
     void Update()

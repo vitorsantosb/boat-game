@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
     public InputField inputName;
     [SerializeField] private static string userName;
 
-
+    
     void Awake()
     {
         this.counterTimer = 5;
@@ -32,7 +32,17 @@ public class SceneController : MonoBehaviour
     public void SetSceneToGo(string param) => SceneManager.LoadSceneAsync(param);
 
     public void SetSceneToGo(int param) => SceneManager.LoadSceneAsync(param);
-    
+
+    public void SetSceneToGoDelay(string param)
+    {
+        StartCoroutine(LoadCenaA(3f, param));
+    }
+
+    IEnumerator LoadCenaA(float delay, string param)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadSceneAsync(param);
+    }
     #region Timers
     public void TimeToStart()
     {
