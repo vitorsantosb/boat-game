@@ -15,6 +15,6 @@ Go to the website [itch.io](https://luiza-cerizza.itch.io/seawar) and follow the
  
  #Team
  The participants in this project
- - Livia Cerizza
+ - Luiza Cerizza
  - Caio Hudson
  - Vitor Batista
