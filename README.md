@@ -15,6 +15,6 @@ Go to the website [itch.io](https://luiza-cerizza.itch.io/seawar) and follow the
  
  #Team
  The participants in this project
- - Luiza Cerizza[Instagram](https://www.instagram.com/luiza_cerizza/)
+ - Luiza Cerizza [Instagram](https://www.instagram.com/luiza_cerizza/)
  - Caio Hudson [Github](https://github.com/McKinley-TheProProgrammer)
- - Vitor Batista[Github](https://github.com/shadomal)
+ - Vitor Batista [Github](https://github.com/shadomal)
