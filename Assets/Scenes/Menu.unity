@@ -3215,6 +3215,13 @@ MonoBehaviour:
     stereoPan: 0
     loop: 1
     playOnAwake: 0
+  - tagClip: Tiro
+    track: {fileID: 8300000, guid: 01b68063590da5440b6c3db1cce91970, type: 3}
+    volume: 1
+    pitch: 1.36
+    stereoPan: 0
+    loop: 0
+    playOnAwake: 0
   audioMixer: {fileID: 24100000, guid: 0cfde5baf0530af419a5fe1653764211, type: 2}
   mainAudioMixerGroup: {fileID: 24300002, guid: 0cfde5baf0530af419a5fe1653764211, type: 2}
 --- !u!4 &1647488209

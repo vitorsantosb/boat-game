@@ -39,6 +39,7 @@ public class ColliderManager : MonoBehaviour
         if (useTriggerEvents && other.gameObject.CompareTag(otherObjTag) ||	other.gameObject.CompareTag(otherObjTag2))
         {
             Pooling.Instance.SpawnFromPool("BalaVfx", other.transform.position, other.transform.rotation);
+            AudioManager.Instance.Play("Tiro");
             other.GetComponent<IHit>()?.DamageHit(10f);
             triggerActionEvents?.Invoke();
         }
